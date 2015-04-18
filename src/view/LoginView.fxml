@@ -18,7 +18,7 @@
                <children>
                   <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../../../../../Downloads/Fruit_Basket_PNG_Clipart.png" />
+                        <Image url="@../../resources/images/loginImage.png" />
                      </image>
                      <VBox.margin>
                         <Insets bottom="30.0" />
