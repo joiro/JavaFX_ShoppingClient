@@ -220,10 +220,7 @@ public class MainApp extends Application {
 	}
 	
 	public void initialCustomer() {
-		/*
-		customerList.add(new Customer("Jonas", "Schindler", "password", "Neue Straße", "Hildesheim", "jonas.schindler@gmail.com"));
-		customerList.add(new Customer("Yang", "Cao", "1234", "XinCun Lu", "Shanghai", "yang@gmail.com"));
-		*/
+
 	}
 	
 	public void addCustomer() {
