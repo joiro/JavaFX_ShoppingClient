@@ -1,49 +1,44 @@
 package tableView;
 
 import javafx.fxml.FXML;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import model.Customer;
 
 public class PasswordController {
 	
-	@FXML TextField reenterNewPw, newPw, currentPw;
+	@FXML private TextField reenterNewPw, newPw, currentPw;
+	@FXML private Label passwordError;
 	
 	private MainApp mainApp;
 	private Stage customerStage;
 	private Customer loggedInCustomer;
 	
-	public PasswordController() { }
 	
-    
-	@FXML public void initialize() {
-    }
+	public PasswordController() { }
 	
     public void setMainApp(MainApp mainApp, Customer customer) {
         this.mainApp = mainApp;
         loggedInCustomer = customer;
     }
-    
-	public void setPasswordStage(Stage customerStage){
-		 this.customerStage = customerStage;
-	}
 	
 	 @FXML private void handleSaveChanges() {
-		 if (currentPw.getText().equals(loggedInCustomer.getPassword())) {
-			 if (reenterNewPw.getText().equals(newPw.getText())) {
+		 if (currentPw.getText().equals(loggedInCustomer.getPassword()) && !currentPw.getText().isEmpty()) {
+			 if (reenterNewPw.getText().equals(newPw.getText()) && !newPw.getText().isEmpty()) {
+				 System.out.println("new pw: "+newPw.getText());
 				 loggedInCustomer.setPassword(newPw.getText());
-				 customerStage.close();
+				 mainApp.saveCustomerToFile(mainApp.customerFile);
+				 mainApp.showCustomer(loggedInCustomer);
 			 } else {
-				 System.out.println("Passwords don't match!");
+				 passwordError.setText("Passwords don't match!");
 			 }
 		 } else {
-			 System.out.println("Current password is incorrect!");
+			 passwordError.setText("Current password is incorrect!");
 		 }
 	 }
 	
 	 @FXML private void handleCancel(){
-		 customerStage.close();
+		 mainApp.showCustomer(loggedInCustomer);
 	 }
-	 
-
 }

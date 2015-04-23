@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.text.*?>
 <?import javafx.scene.control.*?>
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="300.0" prefWidth="500.0" style="-fx-background-color: #A3D1FF;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tableView.AddCustomerController">
+<AnchorPane prefHeight="400.0" prefWidth="500.0" style="-fx-background-color: #A3D1FF;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tableView.AddCustomerController">
    <children>
-      <GridPane layoutX="43.0" layoutY="41.0" prefHeight="141.0" prefWidth="347.0" style="-fx-background-color: #ffffff;">
+      <GridPane layoutX="43.0" layoutY="41.0" prefHeight="141.0" prefWidth="347.0" vgap="30.0" AnchorPane.leftAnchor="40.0" AnchorPane.rightAnchor="40.0">
         <columnConstraints>
           <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
           <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -21,21 +22,43 @@
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <Label text="First name" />
-            <Label text="Last Name" GridPane.rowIndex="1" />
-            <Label text="Email Address" GridPane.rowIndex="2" />
+            <Label text="First name" textFill="WHITE">
+               <font>
+                  <Font size="14.0" />
+               </font></Label>
+            <Label text="Last Name" textFill="WHITE" GridPane.rowIndex="1">
+               <font>
+                  <Font size="14.0" />
+               </font></Label>
+            <Label text="Email Address" textFill="WHITE" GridPane.rowIndex="2">
+               <font>
+                  <Font size="14.0" />
+               </font></Label>
             <TextField fx:id="firstNameField" promptText="First Name" GridPane.columnIndex="1" />
             <TextField fx:id="lastNameField" promptText="Last Name" GridPane.columnIndex="1" GridPane.rowIndex="1" />
             <TextField fx:id="emailAddressField" promptText="Email Address" GridPane.columnIndex="1" GridPane.rowIndex="2" />
             <TextField fx:id="streetField" promptText="Street" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-            <Label text="Street" GridPane.rowIndex="3" />
-            <Label text="City" GridPane.rowIndex="4" />
-            <Label text="Password" GridPane.rowIndex="5" />
+            <Label text="Street" textFill="WHITE" GridPane.rowIndex="3">
+               <font>
+                  <Font size="14.0" />
+               </font></Label>
+            <Label text="City" textFill="WHITE" GridPane.rowIndex="4">
+               <font>
+                  <Font size="14.0" />
+               </font></Label>
+            <Label text="Password" textFill="WHITE" GridPane.rowIndex="5">
+               <font>
+                  <Font size="14.0" />
+               </font></Label>
             <TextField fx:id="cityField" promptText="City" GridPane.columnIndex="1" GridPane.rowIndex="4" />
             <PasswordField fx:id="passwordField" GridPane.columnIndex="1" GridPane.rowIndex="5" />
          </children>
       </GridPane>
-      <Button fx:id="cancel" layoutX="327.0" layoutY="230.0" mnemonicParsing="false" onAction="#handleCancel" style="-fx-background-color: #FFFFFF; -fx-background-radius: 0;" text="Cancel" />
-      <Button fx:id="okay" layoutX="405.0" layoutY="230.0" mnemonicParsing="false" onAction="#handleOk" style="-fx-background-color: #FFFFFF; -fx-background-radius: 0;" text="Okay" />
+      <HBox layoutX="327.0" layoutY="230.0" spacing="20.0" AnchorPane.bottomAnchor="30.0" AnchorPane.rightAnchor="40.0">
+         <children>
+            <Button fx:id="cancel" layoutX="327.0" layoutY="230.0" mnemonicParsing="false" onAction="#handleCancel" style="-fx-background-color: #FFFFFF; -fx-background-radius: 0;" text="Cancel" />
+            <Button fx:id="okay" layoutX="405.0" layoutY="230.0" mnemonicParsing="false" onAction="#handleOk" style="-fx-background-color: #FFFFFF; -fx-background-radius: 0;" text="Okay" />
+         </children>
+      </HBox>
    </children>
 </AnchorPane>

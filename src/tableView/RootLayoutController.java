@@ -4,7 +4,7 @@ import javafx.stage.Stage;
 
 public class RootLayoutController {
 	
-	private MainApp MainApp;
+	private MainApp mainApp;
 	private Stage mainStage;
 	
     public void setMainStage(Stage mainStage) {
@@ -12,16 +12,15 @@ public class RootLayoutController {
     }
     
     public void setMainApp(MainApp mainApp) {
-    	this.MainApp = mainApp;
+    	this.mainApp = mainApp;
     }
     
     public void handleLogOut() {
     	mainStage.close();
-    	MainApp.showLoginView();
+    	mainApp.showLoginView();
     }
 
 	public void handleQuit() {
 		System.exit(0);
-		//mainStage.close();
 	}
 }

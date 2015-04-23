@@ -34,7 +34,6 @@ public class LoginViewController {
         else {
             information.setText("Incorrect password!");
         }
-        
     }
     
     public void handleCancel() {

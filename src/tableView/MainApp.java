@@ -3,6 +3,8 @@ package tableView;
 import java.io.File;
 import java.io.IOException;
 import java.math.BigDecimal;
+import java.math.RoundingMode;
+import java.text.DecimalFormat;
 import java.util.prefs.Preferences;
 
 import javafx.application.Application;
@@ -14,6 +16,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.paint.Color;
@@ -33,9 +36,10 @@ import model.Product;
 
 public class MainApp extends Application {
 	
-	private Stage primaryStage, mainStage, customerStage;
+	private Stage primaryStage, mainStage, customerStage, passwordStage;
+	private Scene loginScene, rootScene, orderScene, customerScene, passwordScene, addCustomerScene;
 	private BorderPane rootLayout;
-	private AnchorPane mainView, viewOrder, customerPane, addCustomer, passwordPane;
+	private AnchorPane mainView, viewOrder, customerPane, addCustomer, loginView, passwordPane;
 	
 	private LoginViewController loginViewController;
 	private mainViewController mainViewController;
@@ -46,33 +50,30 @@ public class MainApp extends Application {
 	private PasswordController passwordController;
 	
 	File customerFile = new File("/Users/agentjs/Documents/Untitled.xml");
+	
+	public static void main(String[] args) { launch(args); }
 
 	@Override
 	public void start(Stage primaryStage) {
 		this.primaryStage = primaryStage;
-		this.primaryStage.setTitle("Customer Login");
 		this.primaryStage.setResizable(false);
 		this.primaryStage.getIcons().add(new Image("file:resources/images/icon.png"));
-		this.primaryStage.initStyle(StageStyle.TRANSPARENT);
-		//this.initialCustomer();
 		this.loadCustomerFromFile(customerFile);
-		//this.primaryStage.setFullScreen(true);
 		
 		// display the login window
 		showLoginView();		
 	}
 	
-	public Stage getPrimaryStage() {
-		return primaryStage;
-	}
+	public Stage getPrimaryStage() { return primaryStage; }
 	
 	public MainApp() {}
 	
+	// loads stage and scene for the customer login
 	public void showLoginView() {
         try {
         	// Load LoginView.fxml from 'view' package
             FXMLLoader loader = new FXMLLoader(MainApp.class.getResource("/view/LoginView.fxml"));
-            AnchorPane loginView = (AnchorPane) loader.load();
+            loginView = (AnchorPane) loader.load();
             
             // Give the controller access to MainApp
             loginViewController = loader.getController();
@@ -80,9 +81,10 @@ public class MainApp extends Application {
             loginViewController.setPrimaryStage(primaryStage);
             
             // Set the scene
-            Scene scene = new Scene(loginView);
-            scene.setFill(Color.TRANSPARENT);
-            primaryStage.setScene(scene);
+            Scene loginScene = new Scene(loginView);
+            loginScene.setFill(Color.TRANSPARENT);
+            primaryStage.setTitle("Customer Login");
+            primaryStage.setScene(loginScene);
             primaryStage.show();
                     
         } catch (IOException e) {
@@ -92,9 +94,11 @@ public class MainApp extends Application {
 	
     public void callMainView(Customer customer) throws Exception{
         this.showRootLayout(customer);
+		System.out.println("callMainView");
         this.primaryStage.close();
     }
     
+    // adds a menubar to the main view
 	public void showRootLayout(Customer customer) {
 		try {
 			// Load RootLayout.fxml from 'view' package
@@ -102,10 +106,10 @@ public class MainApp extends Application {
 			rootLayout = loader.load();
 			mainStage = new Stage();
 			mainStage.setTitle("Shopping Client");
-			mainStage.setMinWidth(800.00);
-			mainStage.setMinHeight(500.00);
-			Scene scene = new Scene(rootLayout);
-			mainStage.setScene(scene);
+			mainStage.setMinWidth(1000.00);
+			mainStage.setMinHeight(600.00);
+			Scene rootScene = new Scene(rootLayout);
+			mainStage.setScene(rootScene);
 			mainStage.show();
 			
             // Give the controller access to MainApp
@@ -120,6 +124,7 @@ public class MainApp extends Application {
 		showProductOverview(customer);
 	}
 
+	// shows the main window with product catalogue
 	public void showProductOverview(Customer customer) {
 		try {
 			// Load MainView.fxml from 'view' package
@@ -136,11 +141,11 @@ public class MainApp extends Application {
 		}	
 	}
 	
+	// shows the actual order view
 	public void showViewOrder() {
 		try{
 	        // Load CartView.fxml from 'view' package
-	        FXMLLoader loader = new FXMLLoader();
-	        loader.setLocation(MainApp.class.getResource("/view/CartView.fxml"));
+	        FXMLLoader loader = new FXMLLoader(MainApp.class.getResource("/view/CartView.fxml"));
 	        viewOrder = (AnchorPane) loader.load();
 	        
 	        // Set the scene
@@ -148,8 +153,8 @@ public class MainApp extends Application {
 	        orderStage.setTitle("Your Order");
 	        orderStage.initModality(Modality.WINDOW_MODAL);
 	        orderStage.initOwner(mainStage);
-	        Scene scene = new Scene(viewOrder);
-	        orderStage.setScene(scene);
+	        Scene orderScene = new Scene(viewOrder);
+	        orderStage.setScene(orderScene);
 	        
 	        // Give the input Person to the controller
 	        cartController = loader.getController();
@@ -164,21 +169,24 @@ public class MainApp extends Application {
 	    }
 	}
 	
+	// empty order list
 	private ObservableList<Product> orderList = FXCollections.observableArrayList();
 	
+	// adds a product to the order list
 	public void addOrder(Product product) {
-		orderList.add(new Product(product.getName(), product.getPrice(), product.getCategory()));
+		orderList.add(new Product(product.getName(), product.getPrice(), product.getCategory(), product.getImage()));
 	}
 
-	public ObservableList<Product> getOrderList(){ 
-		return orderList; 
-	}
+	public ObservableList<Product> getOrderList(){ return orderList; }
 	
+	// calculates the total price of the order
     public double getTotalSum() {
     	double price = 0;
     	for (int i=0; i<getOrderList().size();i++) {
     		price = price + getOrderList().get(i).getPrice();
     	}
+    	price = Math.round(price * 100);
+    	price = price / 100;
     	return price;
     }
 
@@ -189,64 +197,50 @@ public class MainApp extends Application {
 	public void showCustomer(Customer customer) {
 		try{
 	        // Load CustomerView.fxml from 'view' package
-	        FXMLLoader loader = new FXMLLoader();
-	        loader.setLocation(MainApp.class.getResource("/view/CustomerView.fxml"));
+	        FXMLLoader loader = new FXMLLoader(MainApp.class.getResource("/view/CustomerView.fxml"));
 	        customerPane = (AnchorPane) loader.load();
 	        
 	        // Set the scene
-	        Stage customerStage = new Stage();
-	        customerStage.setTitle("Your Profile");
-	        customerStage.initModality(Modality.WINDOW_MODAL);
-	        customerStage.initOwner(mainStage);
-	        Scene scene = new Scene(customerPane);
-	        customerStage.setScene(scene);
+	        //Stage customerStage = new Stage();
+	        //customerStage.setTitle("Your Profile");
+	        //customerStage.initModality(Modality.WINDOW_MODAL);
+	        //customerStage.initOwner(mainStage);
+	        
+	        Scene customerScene = new Scene(customerPane);
+	        primaryStage.initOwner(mainStage);
+	        //primaryStage.initModality(Modality.WINDOW_MODAL);
+	        primaryStage.setTitle("Your Profile");
+	        primaryStage.setScene(customerScene);
 	        
 	        // Give the input Person to the controller
 	        customerController = loader.getController();
-	        customerController.setCustomerStage(customerStage);
+	        customerController.setPrimaryStage(primaryStage);
 	        customerController.showCustomerDetails(customer);
 	        customerController.setMainApp(this, customer);
 	        
 	        // Display the CustomerProfile view and wait for user to close it
-	        customerStage.showAndWait();
+	        primaryStage.show();
 	    } catch (IOException e){
 	        e.printStackTrace();
 	    }
 	}
 	
-	private ObservableList<Customer> customerList = FXCollections.observableArrayList();
-	
-	public ObservableList<Customer> getCustomerList(){ 
-		return customerList; 
-	}
-	
-	public void initialCustomer() {
-
-	}
-	
-	public void addCustomer() {
+	public void showPassword(Customer customer) {
 		try{
-	        // Load AddCustomer.fxml from 'view' package
-	        FXMLLoader loader = new FXMLLoader();
-	        loader.setLocation(MainApp.class.getResource("/view/AddCustomer.fxml"));
-	        addCustomer = (AnchorPane) loader.load();
+	        // Load Password.fxml from 'view' package
+	        FXMLLoader loader = new FXMLLoader(MainApp.class.getResource("/view/Password.fxml"));
+	        passwordPane = (AnchorPane) loader.load();
 	        
-	        // Set the scene
-	        Stage addCustomerStage = new Stage();
-	        addCustomerStage.setTitle("New Customer");
-	        addCustomerStage.initModality(Modality.WINDOW_MODAL);
-	        addCustomerStage.initOwner(primaryStage);
-	        
-	        Scene scene = new Scene(addCustomer);
-	        addCustomerStage.setScene(scene);
+	        Scene passwordScene = new Scene(passwordPane);
+	        primaryStage.setTitle("Change Password");
+	        primaryStage.setScene(passwordScene);
 	        
 	        // Give the input Person to the controller
-	        addCustomerController = loader.getController();
-	        addCustomerController.setAddCustomerStage(addCustomerStage);
-	        addCustomerController.setMainApp(this);
+	        passwordController = loader.getController();
+	        passwordController.setMainApp(this, customer);
 	        
-	        // Display the CustomerProfile view and wait for user to close it
-	        addCustomerStage.showAndWait();
+	        // Display the Password view and wait for user to close it
+	        primaryStage.show();
 	    } catch (IOException e){
 	        e.printStackTrace();
 	    }
@@ -254,10 +248,6 @@ public class MainApp extends Application {
 	
 	public void updateLoginUI() {
 		this.loginViewController.setApp(this);
-	}
-	
-	public static void main(String[] args) {
-		launch(args);
 	}
 	
 	public File getCustomerFilePath() {
@@ -282,8 +272,7 @@ public class MainApp extends Application {
 	
 	public void loadCustomerFromFile(File file) {
 	    try {
-	        JAXBContext context = JAXBContext
-	                .newInstance(CustomerListWrapper.class);
+	        JAXBContext context = JAXBContext.newInstance(CustomerListWrapper.class);
 	        Unmarshaller um = context.createUnmarshaller();
 
 	        // Reading XML from the file and unmarshalling.
@@ -331,28 +320,29 @@ public class MainApp extends Application {
 	    }
 	}
 	
-	public void showPassword(Customer customer) {
+	private ObservableList<Customer> customerList = FXCollections.observableArrayList();
+	
+	public ObservableList<Customer> getCustomerList(){ 
+		return customerList; 
+	}
+	
+	public void addCustomer() {
 		try{
-	        // Load Password.fxml from 'view' package
-	        FXMLLoader loader = new FXMLLoader();
-	        loader.setLocation(MainApp.class.getResource("/view/Password.fxml"));
-	        passwordPane = (AnchorPane) loader.load();
+	        // Load AddCustomer.fxml from 'view' package
+			FXMLLoader loader = new FXMLLoader(MainApp.class.getResource("/view/AddCustomer.fxml"));
+	        addCustomer = (AnchorPane) loader.load();
 	        
-	        // Set the scene
-	        //Stage passwordStage = new Stage();
-	        //passwordStage.setTitle("Change Password");
-	        //passwordStage.initModality(Modality.WINDOW_MODAL);
-	        //passwordStage.initOwner(passwordStage);
-	        Scene scene = new Scene(passwordPane);
-	        this.customerStage.setScene(scene);
+	        // Create new scene and set to primaryStage
+	        Scene addCustomerScene = new Scene(addCustomer);
+	        primaryStage.setTitle("New Customer");
+	        primaryStage.setScene(addCustomerScene);
 	        
 	        // Give the input Person to the controller
-	        passwordController = loader.getController();
-	        passwordController.setPasswordStage(customerStage);
-	        passwordController.setMainApp(this, customer);
+	        addCustomerController = loader.getController();
+	        addCustomerController.setMainApp(this);
 	        
-	        // Display the Password view and wait for user to close it
-	        customerStage.showAndWait();
+	        // Display the CustomerProfile view and wait for user to close it
+	        primaryStage.show();
 	    } catch (IOException e){
 	        e.printStackTrace();
 	    }

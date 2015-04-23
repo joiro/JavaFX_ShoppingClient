@@ -11,21 +11,19 @@ public class CustomerController {
 
 	private Customer loggedInCustomer;
 	private MainApp mainApp;
-	private Stage customerStage;
+	private Stage primaryStage;
 	
 	public CustomerController() { }
 	
-    
-	@FXML public void initialize() {
-    }
+	@FXML public void initialize() { }
 	
     public void setMainApp(MainApp mainApp, Customer customer) {
         this.mainApp = mainApp;
         loggedInCustomer = customer;
     }
     
-	public void setCustomerStage(Stage customerStage){
-		 this.customerStage = customerStage;
+	public void setPrimaryStage(Stage primaryStage){
+		 this.primaryStage = primaryStage;
 	}
 	
 	public void showCustomerDetails(Customer customer) {
@@ -35,11 +33,11 @@ public class CustomerController {
 	}
 	
 	 @FXML private void handleOk() {
-		 customerStage.close();
+		 primaryStage.close();
 	 }
 	
 	 @FXML private void handleCancel(){
-		 customerStage.close();
+		 primaryStage.close();
 	 }
 	 
 	 @FXML private void handleEditDetails() {

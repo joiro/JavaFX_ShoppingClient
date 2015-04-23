@@ -8,11 +8,11 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: A3D1FF;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tableView.CustomerController">
+<AnchorPane prefHeight="370.0" prefWidth="600.0" style="-fx-background-color: A3D1FF;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tableView.CustomerController">
    <children>
       <AnchorPane prefHeight="400.0" prefWidth="500.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <HBox alignment="CENTER_LEFT" prefHeight="52.0" prefWidth="600.0" style="-fx-background-color: #FFFFFF;">
+            <HBox alignment="CENTER_LEFT" prefHeight="52.0" style="-fx-background-color: #FFFFFF;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
                <children>
                   <Label contentDisplay="CENTER" layoutX="29.0" layoutY="14.0" text="Your Profile">
                      <font>
@@ -24,7 +24,12 @@
                   <Insets left="30.0" />
                </padding>
             </HBox>
-            <GridPane layoutX="30.0" layoutY="109.0" prefHeight="108.0" prefWidth="519.0">
+            <Label fx:id="firstName" layoutX="30.0" layoutY="70.0" text="name" textFill="WHITE" AnchorPane.leftAnchor="40.0">
+               <font>
+                  <Font size="24.0" />
+               </font>
+            </Label>
+            <GridPane layoutX="30.0" layoutY="109.0" prefHeight="108.0" prefWidth="519.0" AnchorPane.leftAnchor="40.0" AnchorPane.rightAnchor="40.0">
               <columnConstraints>
                 <ColumnConstraints hgrow="SOMETIMES" maxWidth="320.0" minWidth="10.0" prefWidth="262.33331298828125" />
                   <ColumnConstraints hgrow="SOMETIMES" maxWidth="259.3333435058594" minWidth="10.0" prefWidth="256.66668701171875" />
@@ -53,32 +58,31 @@
                      </font></Label>
                </children>
             </GridPane>
-            <HBox layoutX="385.0" layoutY="340.0">
-               <children>
-                  <Button fx:id="cancel" layoutX="350.0" layoutY="299.0" mnemonicParsing="false" onAction="#handleCancel" style="-fx-background-radius: 0; -fx-background-color: white;" text="Cancel">
-                     <HBox.margin>
-                        <Insets right="20.0" />
-                     </HBox.margin>
-                  </Button>
-                  <Button fx:id="okay" layoutX="426.0" layoutY="299.0" mnemonicParsing="false" onAction="#handleOk" prefWidth="60.0" style="-fx-background-radius: 0; -fx-background-color: white;" text="Okay" />
-               </children>
-            </HBox>
-            <HBox layoutX="29.0" layoutY="241.0">
+            <HBox layoutX="29.0" layoutY="241.0" spacing="20.0" AnchorPane.leftAnchor="40.0" AnchorPane.rightAnchor="40.0">
                <children>
                   <Button fx:id="editDetails" layoutX="29.0" layoutY="241.0" mnemonicParsing="false" onAction="#handleEditDetails" style="-fx-background-radius: 0; -fx-background-color: white;" text="Edit Details">
                      <HBox.margin>
+                        <Insets />
+                     </HBox.margin>
+                  </Button>
+                  <Button fx:id="editPassword" layoutX="140.0" layoutY="242.0" mnemonicParsing="false" onAction="#handleEditPassword" style="-fx-background-radius: 0; -fx-background-color: white;" text="Change Password" />
+                  <Button fx:id="viewOrder" mnemonicParsing="false" onAction="#handleViewOrders" style="-fx-background-radius: 0; -fx-background-color: white;" text="View Orders">
+                     <HBox.margin>
+                        <Insets left="20.0" />
+                     </HBox.margin>
+                  </Button>
+               </children>
+            </HBox>
+            <HBox layoutX="385.0" layoutY="340.0" AnchorPane.bottomAnchor="30.0" AnchorPane.rightAnchor="40.0">
+               <children>
+                  <Button fx:id="cancel" cancelButton="true" layoutX="350.0" layoutY="299.0" mnemonicParsing="false" onAction="#handleCancel" style="-fx-background-radius: 0; -fx-background-color: white;" text="Cancel">
+                     <HBox.margin>
                         <Insets right="20.0" />
                      </HBox.margin>
                   </Button>
-                  <Button fx:id="editPassword" layoutX="140.0" layoutY="242.0" mnemonicParsing="false" onAction="#handleEditPassword" style="-fx-background-radius: 0; -fx-background-color: white;" text="Edit Password" />
+                  <Button fx:id="okay" defaultButton="true" layoutX="426.0" layoutY="299.0" mnemonicParsing="false" onAction="#handleOk" prefWidth="60.0" style="-fx-background-radius: 0; -fx-background-color: white;" text="Okay" />
                </children>
             </HBox>
-            <Button fx:id="viewOrder" layoutX="29.0" layoutY="295.0" mnemonicParsing="false" onAction="#handleViewOrders" style="-fx-background-radius: 0; -fx-background-color: white;" text="View Orders" />
-            <Label fx:id="firstName" layoutX="30.0" layoutY="70.0" text="name" textFill="WHITE">
-               <font>
-                  <Font size="24.0" />
-               </font>
-            </Label>
          </children>
       </AnchorPane>
    </children>

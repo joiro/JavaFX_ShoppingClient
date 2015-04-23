@@ -14,6 +14,8 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import model.Customer;
 import model.Product;
 
@@ -27,6 +29,7 @@ public class mainViewController {
 	@FXML private TableColumn<Product, String> cartPriceColumn;
 	@FXML private Label customerName, totalSum, items, name, price, category, rating, description;
 	@FXML private TextField search;
+	@FXML private ImageView imageView;
     @FXML private ComboBox comboQuantity;
 	
 	private MainApp mainApp;
@@ -45,7 +48,7 @@ public class mainViewController {
         tableView.getSelectionModel().selectedItemProperty().addListener(
         		new ChangeListener<Product>() {
                     public void changed(ObservableValue<? extends Product> observable, Product oldValue, Product newValue) {
-                    	showPersonDetails(newValue);
+                    	showProductDetails(newValue);
                     }
                 });
         
@@ -91,35 +94,36 @@ public class mainViewController {
         customerName.setText(customer.getFirstName()+" "+customer.getLastName());
         loggedInCustomer = customer;
         this.populateCombo();
+        tableView.getSelectionModel().select(0);
+
     }
     
-	public mainViewController() {
-		
-	}
+	public mainViewController() { }
 	
 	public void addToList() {
-		productData.add(new Product("Banana", 0.39, "Food"));
-		productData.add(new Product("Apple", 0.19, "Food"));
-		productData.add(new Product("Milk", 1.69, "Food"));
-		productData.add(new Product("Cheddar Cheese", 2.79, "Food"));
-		productData.add(new Product("Butter", 1.09, "Food"));
-		productData.add(new Product("IPhone", 599.99, "Electronics"));
-		productData.add(new Product("Panasonic 47' LCD Tv", 499.99, "Electronics"));
-		productData.add(new Product("Apple IPad 16GB", 399.99, "Electronics"));
-		productData.add(new Product("Mountainbike 'Trackmaster'", 699.99, "Sports"));
-		
+		productData.add(new Product("Banana", 0.39, "Food", "http://assets.eatingwell.com/sites/default/files/imagecache/310_square/bananas_1.jpg"));
+		productData.add(new Product("Apple", 0.19, "Food", "https://www.handytarifevergleich.de/media/uploads/sites/5/2014/07/apple.jpg"));
+		productData.add(new Product("Milk", 1.69, "Food", "http://www.odec.ca/projects/2010/giesxb2/images/j0441751.png"));
+		productData.add(new Product("Cheddar Cheese", 2.79, "Food", "http://ecx.images-amazon.com/images/I/51A-P9ReGSL._SX466_.jpg"));
+		productData.add(new Product("Butter", 1.09, "Food", "http://www.allmystery.de/i/t74d7de_fette_oele_butter_2.jpg"));
+		productData.add(new Product("IPhone 6 16GB grey", 549.99, "Electronics", "http://ecx.images-amazon.com/images/I/51eclIdmTuL.jpg"));
+		productData.add(new Product("Panasonic 42' LCD Tv", 499.99, "Electronics", "http://ecx.images-amazon.com/images/I/71o-i0JC1GL._SL1500_.jpg"));
+		productData.add(new Product("Apple IPad Air 16GB white", 399.99, "Electronics", "http://ecx.images-amazon.com/images/I/51b-LjnkFJL._SY355_.jpg"));
+		productData.add(new Product("Mountainbike 'Trackmaster'", 699.99, "Sports", "http://ecx.images-amazon.com/images/I/61PdltjOCfL._SX522_.jpg"));
 	}
     
-    private void showPersonDetails(Product Product){
+    private void showProductDetails(Product Product){
         if (Product != null){
-            // Fill labels with details from selected Person
+            // Fill labels with details from selected Product
             name.setText(Product.getName());
             double priceDouble = Product.getPrice();
             String priceString = Double.toString(priceDouble);
             price.setText("£"+priceString);
             category.setText(Product.getCategory());
+            Image productImage = new Image(Product.getImage());
+            imageView.setImage(productImage);
         } else{
-            // Person is null so set labels to be blank
+            // Product is null so set labels to be blank
             name.setText("");
             price.setText("no price");
             category.setText("");
@@ -128,19 +132,26 @@ public class mainViewController {
     
     @FXML public void setLabelText() {
     	items.setText(Integer.toString(mainApp.getOrderList().size()));
-    	totalSum.setText("£"+Double.toString(mainApp.getTotalSum()));
+    	if (mainApp.getOrderList().size() != 0) {
+    		System.out.println("total sum: "+mainApp.getTotalSum());
+    		totalSum.setText("£"+Double.toString(mainApp.getTotalSum()));
+    	} else {
+    		totalSum.setText("£0.00");
+    	}
     }
     
-    @FXML private void handleViewOrder() {
-    	mainApp.showViewOrder();
-    }
+    @FXML private void handleViewOrder() { mainApp.showViewOrder(); }
     
+    @FXML private void handleViewCustomer() { mainApp.showCustomer(loggedInCustomer); }
     
-    @FXML private void handleViewCustomer() {
-    	mainApp.showCustomer(loggedInCustomer);
+    @FXML private void handleViewPassword() {
+    	System.out.println("viewPassword");
     }
     
 	@FXML private void handleAddToCart() {
+        //Image img = new Image("https://www.handytarifevergleich.de/media/uploads/sites/5/2014/07/apple.jpg");
+        //System.out.println("dir: "+System.getProperty("user.dir"));
+        //imageView.setImage(img);
 		Product selectedProduct = tableView.getSelectionModel().getSelectedItem();
 		if (selectedProduct != null) {
 			mainApp.addOrder(selectedProduct);
@@ -151,9 +162,7 @@ public class mainViewController {
 	 }
 	
 	private void populateCombo() {
-		comboQuantity.getItems().addAll(
-				"1","2","3"
-				);
+		comboQuantity.getItems().addAll("0","1","2","3","4","5");
 		
 	}
 	
@@ -163,7 +172,5 @@ public class mainViewController {
     
 	private ObservableList<Product> productData = FXCollections.observableArrayList();
 	
-	public ObservableList<Product> getProductData() {
-		return productData;
-	}
+	public ObservableList<Product> getProductData() { return productData; }
 }

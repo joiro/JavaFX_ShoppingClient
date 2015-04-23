@@ -10,7 +10,6 @@ public class AddCustomerController {
 	@FXML private TextField firstNameField, lastNameField, emailAddressField, passwordField, streetField, cityField;
 	
 	private MainApp mainApp;
-	private Stage addCustomerStage;
 	private Customer customer;
 	
 	public AddCustomerController() { }
@@ -21,10 +20,6 @@ public class AddCustomerController {
     public void setMainApp(MainApp mainApp) {
         this.mainApp = mainApp;
     }
-    
-	public void setAddCustomerStage(Stage addCustomerStage){
-		 this.addCustomerStage = addCustomerStage;
-	}
 	
 	@FXML public void handleOk() {
 		Customer customer = new Customer();
@@ -36,12 +31,12 @@ public class AddCustomerController {
 		 customer.setCity(cityField.getText());
 		 mainApp.getCustomerList().add(customer);
 		 mainApp.saveCustomerToFile(mainApp.customerFile);
-		 mainApp.updateLoginUI();
-		 addCustomerStage.close();	 
+		 mainApp.updateLoginUI();	 
+		 mainApp.showLoginView();
 	}
 
 	
     public void handleCancel() {
-    	addCustomerStage.close();
+    	mainApp.showLoginView();
     }
 }

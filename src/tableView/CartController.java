@@ -18,7 +18,7 @@ import javafx.stage.Stage;
 
 public class CartController {
 	
-	@FXML private Label totalPrice;
+	@FXML private Label totalPrice, basketError;
 	@FXML private Alert alert;
 	@FXML private Button cancelOrder, editOrder, sendOrder, deleteOrder;
 	@FXML private TableView<Product> order;
@@ -63,7 +63,11 @@ public class CartController {
     }
     
     @FXML public void getPrice() {
-    	totalPrice.setText("£"+Double.toString(mainApp.getTotalSum()));
+    	if (mainApp.getOrderList().size() != 0) {
+    		totalPrice.setText("£"+Double.toString(mainApp.getTotalSum()));
+    	} else {
+    		totalPrice.setText("£0.00");
+    	}
     }
         
 	 @FXML private void handleCancel(){
@@ -79,13 +83,17 @@ public class CartController {
 	        int selectedIndex = order.getSelectionModel().getSelectedIndex();
 	        if (selectedIndex >= 0){
 	            order.getItems().remove(selectedIndex);
-	            totalPrice.setText("£"+Double.toString(mainApp.getTotalSum()));
+	            //totalPrice.setText("£"+Double.toString(mainApp.getTotalSum()));
+	            this.getPrice();
 	        }
 	 }
 	 
 	 @FXML private void handleSend(){
-		 System.out.println("handleSend");
-		 createAlert();
+		 if (mainApp.getOrderList().size() != 0){
+			 createAlert();
+		 } else {
+			 basketError.setText("the basket is empty!");
+		 }
 	 }
 	 
 	 private void createAlert() {
