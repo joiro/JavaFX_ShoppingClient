@@ -2,6 +2,7 @@ package tableView;
 
 import java.io.File;
 import java.io.IOException;
+import java.math.BigDecimal;
 import java.util.prefs.Preferences;
 
 import javafx.application.Application;
@@ -53,7 +54,7 @@ public class MainApp extends Application {
 		this.primaryStage.setResizable(false);
 		this.primaryStage.getIcons().add(new Image("file:resources/images/icon.png"));
 		this.primaryStage.initStyle(StageStyle.TRANSPARENT);
-		this.initialCustomer();
+		//this.initialCustomer();
 		this.loadCustomerFromFile(customerFile);
 		//this.primaryStage.setFullScreen(true);
 		
@@ -173,8 +174,8 @@ public class MainApp extends Application {
 		return orderList; 
 	}
 	
-    public int getTotalSum() {
-    	int price = 0;
+    public double getTotalSum() {
+    	double price = 0;
     	for (int i=0; i<getOrderList().size();i++) {
     		price = price + getOrderList().get(i).getPrice();
     	}

@@ -1,5 +1,6 @@
 package tableView;
 
+
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -7,6 +8,7 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import javafx.collections.transformation.SortedList;
 import javafx.fxml.FXML;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -25,6 +27,7 @@ public class mainViewController {
 	@FXML private TableColumn<Product, String> cartPriceColumn;
 	@FXML private Label customerName, totalSum, items, name, price, category, rating, description;
 	@FXML private TextField search;
+    @FXML private ComboBox comboQuantity;
 	
 	private MainApp mainApp;
 	private CartController controller;
@@ -62,7 +65,7 @@ public class mainViewController {
 				
 				if (product.getName().toLowerCase().indexOf(lowerCaseFilter) != -1) {
 					return true; // Filter matches first name.
-				} else if (Integer.toString(product.getPrice()).toLowerCase().indexOf(lowerCaseFilter) != -1) {
+				} else if (Double.toString(product.getPrice()).toLowerCase().indexOf(lowerCaseFilter) != -1) {
 					return true; // Filter matches last name.
 				} else if (product.getCategory().toLowerCase().indexOf(lowerCaseFilter) != -1) {
 					return true; // Filter matches Category.
@@ -87,6 +90,7 @@ public class mainViewController {
         this.addToList();
         customerName.setText(customer.getFirstName()+" "+customer.getLastName());
         loggedInCustomer = customer;
+        this.populateCombo();
     }
     
 	public mainViewController() {
@@ -94,20 +98,25 @@ public class mainViewController {
 	}
 	
 	public void addToList() {
-		productData.add(new Product("Banana", 2, "Food"));
-		productData.add(new Product("Apple", 1, "Food"));
-		productData.add(new Product("IPhone", 1000, "Electronics"));
-		productData.add(new Product("Bicycle", 700, "Sports"));
-		productData.add(new Product("IPad", 500, "Electronics"));
+		productData.add(new Product("Banana", 0.39, "Food"));
+		productData.add(new Product("Apple", 0.19, "Food"));
+		productData.add(new Product("Milk", 1.69, "Food"));
+		productData.add(new Product("Cheddar Cheese", 2.79, "Food"));
+		productData.add(new Product("Butter", 1.09, "Food"));
+		productData.add(new Product("IPhone", 599.99, "Electronics"));
+		productData.add(new Product("Panasonic 47' LCD Tv", 499.99, "Electronics"));
+		productData.add(new Product("Apple IPad 16GB", 399.99, "Electronics"));
+		productData.add(new Product("Mountainbike 'Trackmaster'", 699.99, "Sports"));
+		
 	}
     
     private void showPersonDetails(Product Product){
         if (Product != null){
             // Fill labels with details from selected Person
             name.setText(Product.getName());
-            int priceInt = Product.getPrice();
-            String priceString = Integer.toString(priceInt);
-            price.setText(priceString+".00€");
+            double priceDouble = Product.getPrice();
+            String priceString = Double.toString(priceDouble);
+            price.setText("£"+priceString);
             category.setText(Product.getCategory());
         } else{
             // Person is null so set labels to be blank
@@ -119,7 +128,7 @@ public class mainViewController {
     
     @FXML public void setLabelText() {
     	items.setText(Integer.toString(mainApp.getOrderList().size()));
-    	totalSum.setText(Integer.toString(mainApp.getTotalSum())+".00€");
+    	totalSum.setText("£"+Double.toString(mainApp.getTotalSum()));
     }
     
     @FXML private void handleViewOrder() {
@@ -139,8 +148,18 @@ public class mainViewController {
 		} else {
 			System.out.println("No item selected!");
 		}
-
 	 }
+	
+	private void populateCombo() {
+		comboQuantity.getItems().addAll(
+				"1","2","3"
+				);
+		
+	}
+	
+	private void Array() {
+		
+	}
     
 	private ObservableList<Product> productData = FXCollections.observableArrayList();
 	

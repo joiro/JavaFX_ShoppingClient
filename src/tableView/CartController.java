@@ -58,11 +58,12 @@ public class CartController {
         this.mainApp = mainApp;
         // Add observable list data to the table
         ObservableList<Product> p = mainApp.getOrderList();
+        order.setPlaceholder(new Label("The Basket is empty!"));
         order.setItems(p);
     }
     
     @FXML public void getPrice() {
-    	totalPrice.setText(Integer.toString(mainApp.getTotalSum())+".00€");
+    	totalPrice.setText("£"+Double.toString(mainApp.getTotalSum()));
     }
         
 	 @FXML private void handleCancel(){
@@ -75,11 +76,10 @@ public class CartController {
 	 }
 	 
 	 @FXML private void handleDelete(){
-		 //System.out.println("handleDelete");
 	        int selectedIndex = order.getSelectionModel().getSelectedIndex();
 	        if (selectedIndex >= 0){
 	            order.getItems().remove(selectedIndex);
-	            totalPrice.setText(Integer.toString(mainApp.getTotalSum())+".00€");
+	            totalPrice.setText("£"+Double.toString(mainApp.getTotalSum()));
 	        }
 	 }
 	 
