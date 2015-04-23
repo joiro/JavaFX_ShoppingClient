@@ -133,8 +133,7 @@ public class mainViewController {
     @FXML public void setLabelText() {
     	items.setText(Integer.toString(mainApp.getOrderList().size()));
     	if (mainApp.getOrderList().size() != 0) {
-    		System.out.println("total sum: "+mainApp.getTotalSum());
-    		totalSum.setText("£"+Double.toString(mainApp.getTotalSum()));
+    		totalSum.setText("£"+Double.toString(mainApp.getTotalPrice()));
     	} else {
     		totalSum.setText("£0.00");
     	}

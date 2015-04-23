@@ -18,7 +18,7 @@ import javafx.stage.Stage;
 
 public class CartController {
 	
-	@FXML private Label totalPrice, basketError;
+	@FXML private Label totalPrice, totalOrder, shippingFee, basketError;
 	@FXML private Alert alert;
 	@FXML private Button cancelOrder, editOrder, sendOrder, deleteOrder;
 	@FXML private TableView<Product> order;
@@ -30,6 +30,7 @@ public class CartController {
 	private MainApp mainApp;
 	private Stage orderStage;
 	private mainViewController controller;
+	private double shipping = 2.55;
 	
 	@FXML
 	private void initialize() {
@@ -64,7 +65,15 @@ public class CartController {
     
     @FXML public void getPrice() {
     	if (mainApp.getOrderList().size() != 0) {
-    		totalPrice.setText("£"+Double.toString(mainApp.getTotalSum()));
+    		if (mainApp.getTotalPrice() >= 20.0) {
+    			shipping = 0;
+    		}
+    		totalPrice.setText("£"+Double.toString(mainApp.getTotalPrice()));
+    		shippingFee.setText("£"+shipping);
+    		double finalPrice = mainApp.getTotalPrice() + shipping;
+    		finalPrice = Math.round(finalPrice * 100);
+    		finalPrice = finalPrice / 100;
+			totalOrder.setText("£"+finalPrice);
     	} else {
     		totalPrice.setText("£0.00");
     	}

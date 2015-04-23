@@ -41,7 +41,7 @@ public class LoginViewController {
     }
     
     @FXML public void createNewAccount() {
-    	MainApp.addCustomer();
+    	MainApp.addCustomer(null);
     }
     
     public void setPrimaryStage(Stage primaryStage) {

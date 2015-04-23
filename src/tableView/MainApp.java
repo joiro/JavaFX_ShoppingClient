@@ -50,6 +50,7 @@ public class MainApp extends Application {
 	private PasswordController passwordController;
 	
 	File customerFile = new File("/Users/agentjs/Documents/Untitled.xml");
+	File orderFile = new File("/Users/agentjs/Documents/orders");
 	
 	public static void main(String[] args) { launch(args); }
 
@@ -176,11 +177,18 @@ public class MainApp extends Application {
 	public void addOrder(Product product) {
 		orderList.add(new Product(product.getName(), product.getPrice(), product.getCategory(), product.getImage()));
 	}
+	
+	public void removeCustomer(Customer customer) {
+		customerList.remove(customer);
+		this.saveCustomerToFile(customerFile);
+		mainStage.close();
+		this.showLoginView();
+	}
 
 	public ObservableList<Product> getOrderList(){ return orderList; }
 	
 	// calculates the total price of the order
-    public double getTotalSum() {
+    public double getTotalPrice() {
     	double price = 0;
     	for (int i=0; i<getOrderList().size();i++) {
     		price = price + getOrderList().get(i).getPrice();
@@ -200,14 +208,8 @@ public class MainApp extends Application {
 	        FXMLLoader loader = new FXMLLoader(MainApp.class.getResource("/view/CustomerView.fxml"));
 	        customerPane = (AnchorPane) loader.load();
 	        
-	        // Set the scene
-	        //Stage customerStage = new Stage();
-	        //customerStage.setTitle("Your Profile");
-	        //customerStage.initModality(Modality.WINDOW_MODAL);
-	        //customerStage.initOwner(mainStage);
-	        
 	        Scene customerScene = new Scene(customerPane);
-	        primaryStage.initOwner(mainStage);
+	        //primaryStage.initOwner(mainStage);
 	        //primaryStage.initModality(Modality.WINDOW_MODAL);
 	        primaryStage.setTitle("Your Profile");
 	        primaryStage.setScene(customerScene);
@@ -326,7 +328,7 @@ public class MainApp extends Application {
 		return customerList; 
 	}
 	
-	public void addCustomer() {
+	public void addCustomer(Customer customer) {
 		try{
 	        // Load AddCustomer.fxml from 'view' package
 			FXMLLoader loader = new FXMLLoader(MainApp.class.getResource("/view/AddCustomer.fxml"));
@@ -339,13 +341,12 @@ public class MainApp extends Application {
 	        
 	        // Give the input Person to the controller
 	        addCustomerController = loader.getController();
-	        addCustomerController.setMainApp(this);
+	        addCustomerController.setMainApp(this, customer);
 	        
 	        // Display the CustomerProfile view and wait for user to close it
 	        primaryStage.show();
 	    } catch (IOException e){
 	        e.printStackTrace();
 	    }
-	}
-	
+	}	
 }

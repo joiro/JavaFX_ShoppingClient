@@ -42,11 +42,10 @@ public class CustomerController {
 	 
 	 @FXML private void handleEditDetails() {
 		 System.out.println("edit Details");
+		 mainApp.addCustomer(loggedInCustomer);
 	 }
 	 
 	 @FXML private void handleEditPassword() {
-		 System.out.println("edit Password");
-		 System.out.println(loggedInCustomer);
 		 mainApp.showPassword(loggedInCustomer);
 	 }
 	 

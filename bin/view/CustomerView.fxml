@@ -14,7 +14,7 @@
          <children>
             <HBox alignment="CENTER_LEFT" prefHeight="52.0" style="-fx-background-color: #FFFFFF;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
                <children>
-                  <Label contentDisplay="CENTER" layoutX="29.0" layoutY="14.0" text="Your Profile">
+                  <Label contentDisplay="CENTER" layoutX="29.0" layoutY="14.0" text="Profile">
                      <font>
                         <Font name="Avenir Roman" size="41.0" />
                      </font>

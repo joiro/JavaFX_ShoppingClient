@@ -104,10 +104,15 @@
                            <children>
                               <ComboBox fx:id="comboQuantity" prefHeight="26.0" prefWidth="99.0" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="300.0" />
                               <Button fx:id="addToCart" layoutX="221.0" layoutY="284.0" mnemonicParsing="false" onAction="#handleAddToCart" text="Add to cart" AnchorPane.bottomAnchor="30.0" AnchorPane.rightAnchor="40.0" />
-                              <ImageView fx:id="imageView" fitHeight="153.0" fitWidth="150.0" layoutX="255.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="20.0">
-                                 <image>
-                                    <Image url="@../../resources/images/icon.png" />
-                                 </image></ImageView>
+                              <VBox alignment="CENTER" layoutX="255.0" layoutY="20.0" maxWidth="0.0" minHeight="200.0" minWidth="200.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="20.0">
+                                 <children>
+                                    <ImageView fx:id="imageView" fitHeight="153.0" fitWidth="150.0" layoutX="255.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="20.0">
+                                       <image>
+                                          <Image url="@../../resources/images/icon.png" />
+                                       </image>
+                                    </ImageView>
+                                 </children>
+                              </VBox>
                               <Label fx:id="name" layoutX="33.0" layoutY="44.0" text="pName" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="30.0">
                                  <font>
                                     <Font size="18.0" />
