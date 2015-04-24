@@ -174,7 +174,7 @@ public class MainApp extends Application {
 	private ObservableList<Product> orderList = FXCollections.observableArrayList();
 	
 	// adds a product to the order list
-	public void addOrder(Product product) {
+	public void addOrder(Product product, int quantity) {
 		orderList.add(new Product(product.getName(), product.getPrice(), product.getCategory(), product.getImage()));
 	}
 	
@@ -324,9 +324,7 @@ public class MainApp extends Application {
 	
 	private ObservableList<Customer> customerList = FXCollections.observableArrayList();
 	
-	public ObservableList<Customer> getCustomerList(){ 
-		return customerList; 
-	}
+	public ObservableList<Customer> getCustomerList(){ return customerList; }
 	
 	public void addCustomer(Customer customer) {
 		try{

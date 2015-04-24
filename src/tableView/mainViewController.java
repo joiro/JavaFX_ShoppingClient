@@ -30,10 +30,11 @@ public class mainViewController {
 	@FXML private Label customerName, totalSum, items, name, price, category, rating, description;
 	@FXML private TextField search;
 	@FXML private ImageView imageView;
-    @FXML private ComboBox comboQuantity;
+    @FXML private ComboBox<Integer> comboQuantity;
 	
 	private MainApp mainApp;
 	private CartController controller;
+	private int quant;
 	
 	private Customer loggedInCustomer;
 	
@@ -144,7 +145,7 @@ public class mainViewController {
     @FXML private void handleViewCustomer() { mainApp.showCustomer(loggedInCustomer); }
     
     @FXML private void handleViewPassword() {
-    	System.out.println("viewPassword");
+    	this.quantityTest();
     }
     
 	@FXML private void handleAddToCart() {
@@ -153,7 +154,7 @@ public class mainViewController {
         //imageView.setImage(img);
 		Product selectedProduct = tableView.getSelectionModel().getSelectedItem();
 		if (selectedProduct != null) {
-			mainApp.addOrder(selectedProduct);
+			mainApp.addOrder(selectedProduct, quant);
 			setLabelText();
 		} else {
 			System.out.println("No item selected!");
@@ -161,12 +162,12 @@ public class mainViewController {
 	 }
 	
 	private void populateCombo() {
-		comboQuantity.getItems().addAll("0","1","2","3","4","5");
-		
+		comboQuantity.getItems().addAll(1,2,3,4,5,6,7,8,9,10);
 	}
 	
-	private void Array() {
-		
+	private void quantityTest() {
+		quant = (int) comboQuantity.getSelectionModel().getSelectedItem();
+		System.out.println("quant: "+quant);
 	}
     
 	private ObservableList<Product> productData = FXCollections.observableArrayList();
