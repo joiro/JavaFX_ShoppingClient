@@ -1,7 +1,9 @@
 package tableView;
 
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 
+import model.Customer;
 import model.Product;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -16,7 +18,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
-public class CartController {
+public class BasketController {
 	
 	@FXML private Label totalPrice, totalOrder, shippingFee, basketError;
 	@FXML private Alert alert;
@@ -29,22 +31,24 @@ public class CartController {
 	
 	private MainApp mainApp;
 	private Stage orderStage;
-	private mainViewController controller;
+	private MainViewController controller;
 	private double shipping = 2.55;
+	
+	private Customer loggedInCustomer;
 	
 	@FXML
 	private void initialize() {
 		orderProduct.setCellValueFactory(new PropertyValueFactory<Product, String>("name"));
 		orderPrice.setCellValueFactory(new PropertyValueFactory<Product, String>("price"));
 		orderCategory.setCellValueFactory(new PropertyValueFactory<Product, String>("category"));
-
+		orderQuantity.setCellValueFactory(new PropertyValueFactory<Product, String>("number"));
 	}
 	
 	public void setEditStage(Stage orderStage){
 		 this.orderStage = orderStage;
 	}
 	
-	public CartController() {
+	public BasketController() {
 		try {
 			FXMLLoader loader = new FXMLLoader(MainApp.class.getResource("/view/mainView.fxml"));
 			AnchorPane mainView = (AnchorPane) loader.load();
@@ -55,16 +59,17 @@ public class CartController {
 		}
 	}
 
-    public void setMainApp(MainApp mainApp){
+    public void setMainApp(MainApp mainApp, Customer customer){
         this.mainApp = mainApp;
         // Add observable list data to the table
-        ObservableList<Product> p = mainApp.getOrderList();
+        ObservableList<Product> p = mainApp.getBasketList();
         order.setPlaceholder(new Label("The Basket is empty!"));
+        loggedInCustomer = customer;
         order.setItems(p);
     }
     
     @FXML public void getPrice() {
-    	if (mainApp.getOrderList().size() != 0) {
+    	if (mainApp.getBasketList().size() != 0) {
     		if (mainApp.getTotalPrice() >= 20.0) {
     			shipping = 0;
     		}
@@ -84,21 +89,19 @@ public class CartController {
 		 mainApp.updateUIMainView();
 	 }
 	 
-	 @FXML private void handleEdit(){
-		 System.out.println("handleEdit");
-	 }
-	 
 	 @FXML private void handleDelete(){
 	        int selectedIndex = order.getSelectionModel().getSelectedIndex();
 	        if (selectedIndex >= 0){
 	            order.getItems().remove(selectedIndex);
-	            //totalPrice.setText("£"+Double.toString(mainApp.getTotalSum()));
 	            this.getPrice();
 	        }
 	 }
 	 
 	 @FXML private void handleSend(){
-		 if (mainApp.getOrderList().size() != 0){
+		 java.util.Date date= new java.util.Date();
+		 if (mainApp.getBasketList().size() != 0){
+			 mainApp.saveOrder(loggedInCustomer, mainApp.getTotalPrice(), date.toString());
+			 mainApp.getBasketList().clear();
 			 createAlert();
 		 } else {
 			 basketError.setText("the basket is empty!");
@@ -110,8 +113,6 @@ public class CartController {
 		 alert.setTitle("Confirmation");
 		 alert.setHeaderText(null);
 		 alert.setContentText("Your order has been sent!");
-
 		 alert.showAndWait();
 	 }
-
 }

@@ -1,6 +1,9 @@
 package tableView;
 
 import model.Customer;
+import model.Order;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.stage.Stage;
@@ -50,7 +53,7 @@ public class CustomerController {
 	 }
 	 
 	 @FXML private void handleViewOrders() {
-		 System.out.println("view Orders");
+		 mainApp.showOrder(loggedInCustomer);
 	 }
 	 
 

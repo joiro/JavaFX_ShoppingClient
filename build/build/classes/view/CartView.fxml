@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="307.0" prefWidth="431.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tableView.CartController">
+<AnchorPane prefHeight="307.0" prefWidth="431.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tableView.BasketController">
    <children>
       <HBox layoutX="31.0" layoutY="266.0" prefHeight="26.0" prefWidth="369.0" spacing="10.0" AnchorPane.leftAnchor="31.0" AnchorPane.rightAnchor="31.0">
          <children>

@@ -16,6 +16,7 @@ public class RootLayoutController {
     }
     
     public void handleLogOut() {
+    	mainApp.getBasketList().clear();
     	mainStage.close();
     	mainApp.showLoginView();
     }

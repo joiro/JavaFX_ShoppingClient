@@ -10,26 +10,20 @@
 
 <AnchorPane prefHeight="370.0" prefWidth="600.0" style="-fx-background-color: A3D1FF;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tableView.CustomerController">
    <children>
-      <AnchorPane prefHeight="400.0" prefWidth="500.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <AnchorPane prefHeight="400.0" prefWidth="500.0" style="-fx-background-color: white;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <HBox alignment="CENTER_LEFT" prefHeight="52.0" style="-fx-background-color: #FFFFFF;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
-               <children>
-                  <Label contentDisplay="CENTER" layoutX="29.0" layoutY="14.0" text="Profile">
-                     <font>
-                        <Font name="Avenir Roman" size="41.0" />
-                     </font>
-                  </Label>
-               </children>
-               <padding>
-                  <Insets left="30.0" />
-               </padding>
-            </HBox>
-            <Label fx:id="firstName" layoutX="30.0" layoutY="70.0" text="name" textFill="WHITE" AnchorPane.leftAnchor="40.0">
+            <Region layoutX="101.0" layoutY="-48.0" prefHeight="60.0" style="-fx-background-color: purple;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+            <Label contentDisplay="CENTER" prefHeight="60.0" text="Profile" textFill="WHITE" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                <font>
-                  <Font size="24.0" />
+                  <Font name="Avenir Roman" size="35.0" />
                </font>
             </Label>
-            <GridPane layoutX="30.0" layoutY="109.0" prefHeight="108.0" prefWidth="519.0" AnchorPane.leftAnchor="40.0" AnchorPane.rightAnchor="40.0">
+            <Label fx:id="firstName" layoutX="30.0" layoutY="70.0" text="name" AnchorPane.leftAnchor="40.0">
+               <font>
+                  <Font name="Avenir Roman" size="24.0" />
+               </font>
+            </Label>
+            <GridPane layoutX="40.0" layoutY="118.0" prefHeight="76.0" prefWidth="520.0" AnchorPane.leftAnchor="40.0" AnchorPane.rightAnchor="40.0">
               <columnConstraints>
                 <ColumnConstraints hgrow="SOMETIMES" maxWidth="320.0" minWidth="10.0" prefWidth="262.33331298828125" />
                   <ColumnConstraints hgrow="SOMETIMES" maxWidth="259.3333435058594" minWidth="10.0" prefWidth="256.66668701171875" />
@@ -37,50 +31,64 @@
               <rowConstraints>
                 <RowConstraints maxHeight="27.0" minHeight="10.0" prefHeight="20.0" vgrow="SOMETIMES" />
                   <RowConstraints maxHeight="48.0" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                  <RowConstraints maxHeight="37.0" minHeight="1.0" prefHeight="20.0" vgrow="SOMETIMES" />
-                  <RowConstraints maxHeight="37.0" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
-                  <Label text="Username" textFill="WHITE" />
-                  <Label text="Address:" textFill="WHITE" GridPane.columnIndex="1" />
-                  <Label fx:id="userName" text="username" textFill="WHITE" GridPane.rowIndex="1">
+                  <Label text="Address:" GridPane.columnIndex="1">
                      <font>
-                        <Font size="18.0" />
+                        <Font name="Avenir Roman" size="16.0" />
                      </font></Label>
-                  <Label fx:id="address" text="street" textFill="WHITE" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                  <Label fx:id="address" text="street" GridPane.columnIndex="1" GridPane.rowIndex="1">
                      <font>
-                        <Font size="18.0" />
+                        <Font name="Avenir Roman" size="18.0" />
                      </font></Label>
-                  <Label text="email-address:" textFill="WHITE" GridPane.rowIndex="2" />
-                  <Label fx:id="emailAddress" text="emailAddress" textFill="WHITE" GridPane.rowIndex="3">
+                  <Label text="email-address:">
                      <font>
-                        <Font size="18.0" />
+                        <Font name="Avenir Roman" size="16.0" />
+                     </font></Label>
+                  <Label fx:id="emailAddress" text="emailAddress" GridPane.rowIndex="1">
+                     <font>
+                        <Font name="Avenir Roman" size="18.0" />
                      </font></Label>
                </children>
             </GridPane>
             <HBox layoutX="29.0" layoutY="241.0" spacing="20.0" AnchorPane.leftAnchor="40.0" AnchorPane.rightAnchor="40.0">
                <children>
-                  <Button fx:id="editDetails" layoutX="29.0" layoutY="241.0" mnemonicParsing="false" onAction="#handleEditDetails" style="-fx-background-radius: 0; -fx-background-color: white;" text="Edit Details">
+                  <Button fx:id="editDetails" layoutX="29.0" layoutY="241.0" mnemonicParsing="false" onAction="#handleEditDetails" prefHeight="30.0" style="-fx-background-color: #585e67;" text="Edit Details" textFill="WHITE">
                      <HBox.margin>
                         <Insets />
                      </HBox.margin>
+                     <font>
+                        <Font name="System Bold" size="13.0" />
+                     </font>
                   </Button>
-                  <Button fx:id="editPassword" layoutX="140.0" layoutY="242.0" mnemonicParsing="false" onAction="#handleEditPassword" style="-fx-background-radius: 0; -fx-background-color: white;" text="Change Password" />
-                  <Button fx:id="viewOrder" mnemonicParsing="false" onAction="#handleViewOrders" style="-fx-background-radius: 0; -fx-background-color: white;" text="View Orders">
+                  <Button fx:id="editPassword" layoutX="140.0" layoutY="242.0" mnemonicParsing="false" onAction="#handleEditPassword" prefHeight="30.0" style="-fx-background-color: #585e67;" text="Change Password" textFill="WHITE">
+                     <font>
+                        <Font name="System Bold" size="13.0" />
+                     </font></Button>
+                  <Button fx:id="viewOrder" mnemonicParsing="false" onAction="#handleViewOrders" prefHeight="30.0" style="-fx-background-color: #585e67;" text="View Orders" textFill="WHITE">
                      <HBox.margin>
                         <Insets left="20.0" />
                      </HBox.margin>
+                     <font>
+                        <Font name="System Bold" size="13.0" />
+                     </font>
                   </Button>
                </children>
             </HBox>
-            <HBox layoutX="385.0" layoutY="340.0" AnchorPane.bottomAnchor="30.0" AnchorPane.rightAnchor="40.0">
+            <HBox layoutX="385.0" layoutY="340.0" AnchorPane.bottomAnchor="20.0" AnchorPane.rightAnchor="40.0">
                <children>
-                  <Button fx:id="cancel" cancelButton="true" layoutX="350.0" layoutY="299.0" mnemonicParsing="false" onAction="#handleCancel" style="-fx-background-radius: 0; -fx-background-color: white;" text="Cancel">
+                  <Button fx:id="cancel" cancelButton="true" layoutX="350.0" layoutY="299.0" mnemonicParsing="false" onAction="#handleCancel" prefHeight="30.0" style="-fx-background-color: #585e67;" text="Cancel" textFill="WHITE">
                      <HBox.margin>
                         <Insets right="20.0" />
                      </HBox.margin>
+                     <font>
+                        <Font name="System Bold" size="13.0" />
+                     </font>
                   </Button>
-                  <Button fx:id="okay" defaultButton="true" layoutX="426.0" layoutY="299.0" mnemonicParsing="false" onAction="#handleOk" prefWidth="60.0" style="-fx-background-radius: 0; -fx-background-color: white;" text="Okay" />
+                  <Button fx:id="okay" defaultButton="true" layoutX="426.0" layoutY="299.0" mnemonicParsing="false" onAction="#handleOk" prefHeight="30.0" prefWidth="60.0" style="-fx-background-color: #585e67;" text="Okay" textFill="WHITE">
+                     <font>
+                        <Font name="System Bold" size="13.0" />
+                     </font></Button>
                </children>
             </HBox>
          </children>

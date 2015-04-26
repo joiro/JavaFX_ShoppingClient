@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane prefHeight="370.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tableView.OrderController">
+   <children>
+      <Region layoutX="64.0" prefHeight="60.0" style="-fx-background-color: purple;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+      <Label layoutX="19.0" layoutY="-3.0" prefHeight="60.0" text="My Orders" textFill="WHITE" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <font>
+            <Font name="Avenir Roman" size="35.0" />
+         </font>
+      </Label>
+      <ListView fx:id="orderlistView" layoutX="68.0" layoutY="85.0" prefHeight="200.0" prefWidth="200.0" AnchorPane.leftAnchor="40.0" AnchorPane.rightAnchor="40.0" />
+      <HBox layoutX="409.0" layoutY="304.0" spacing="20.0" AnchorPane.bottomAnchor="20.0" AnchorPane.rightAnchor="40.0">
+         <children>
+            <Button layoutX="486.0" layoutY="304.0" mnemonicParsing="false" onAction="#handleCancel" prefHeight="30.0" style="-fx-background-color: #585e67;" text="Cancel" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="13.0" />
+               </font></Button>
+            <Button layoutX="409.0" layoutY="304.0" mnemonicParsing="false" onAction="#handleOk" prefHeight="30.0" style="-fx-background-color: #585e67;" text="Okay" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="13.0" />
+               </font></Button>
+         </children>
+      </HBox>
+   </children>
+</AnchorPane>

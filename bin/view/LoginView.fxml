@@ -10,7 +10,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="500.0" style="-fx-background-color: #A3D1FF;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tableView.LoginViewController">
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="500.0" style="-fx-background-color: #white;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tableView.LoginController">
    <children>
       <AnchorPane layoutY="-3.0" prefHeight="414.0" prefWidth="500.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="-3.0">
          <children>
@@ -24,19 +24,25 @@
                         <Insets bottom="30.0" />
                      </VBox.margin>
                   </ImageView>
-                  <ComboBox fx:id="customerComboBox" prefHeight="35.0" prefWidth="408.0" style="-fx-background-radius: 0; -fx-background-color: white;" />
-                  <PasswordField fx:id="passwordNode" onAction="#loginAction" prefHeight="35.0" prefWidth="340.0" promptText="Password" style="-fx-background-color: #EBF5FF; -fx-background-radius: 0;">
+                  <ComboBox fx:id="customerComboBox" prefHeight="35.0" prefWidth="408.0" style="-fx-background-radius: 0; -fx-background-color: white; -fx-border-color: grey;" />
+                  <PasswordField fx:id="passwordNode" onAction="#loginAction" prefHeight="35.0" prefWidth="340.0" promptText="Password" style="-fx-background-color: #white; -fx-background-radius: 0;">
                      <VBox.margin>
                         <Insets top="20.0" />
                      </VBox.margin></PasswordField>
                   <HBox alignment="CENTER" prefHeight="0.0" prefWidth="300.0">
                      <children>
-                        <Button fx:id="cancelButton" mnemonicParsing="false" onAction="#handleCancel" prefWidth="70.0" style="-fx-background-radius: 0; -fx-background-color: white;" text="Cancel">
+                        <Button fx:id="cancelButton" minHeight="-Infinity" mnemonicParsing="false" onAction="#handleCancel" prefHeight="30.0" prefWidth="70.0" style="-fx-background-color: #585e67;" text="Cancel" textFill="WHITE">
                            <HBox.margin>
                               <Insets right="20.0" />
                            </HBox.margin>
+                           <font>
+                              <Font name="System Bold" size="13.0" />
+                           </font>
                         </Button>
-                        <Button fx:id="LoginButton" mnemonicParsing="false" onAction="#loginAction" prefWidth="70.0" style="-fx-background-radius: 0; -fx-background-color: white;" text="Login" />
+                        <Button fx:id="LoginButton" minHeight="-Infinity" mnemonicParsing="false" onAction="#loginAction" prefHeight="30.0" prefWidth="70.0" style="-fx-background-color: #585e67;" text="Login" textFill="WHITE">
+                           <font>
+                              <Font name="System Bold" size="13.0" />
+                           </font></Button>
                      </children>
                      <VBox.margin>
                         <Insets top="20.0" />
@@ -45,7 +51,7 @@
                   <Label fx:id="information" textFill="RED" />
                </children>
             </VBox>
-            <Label layoutX="14.0" layoutY="378.0" onMouseClicked="#createNewAccount" text="Create new Account" textFill="WHITE" AnchorPane.bottomAnchor="9.0">
+            <Label layoutX="14.0" layoutY="378.0" onMouseClicked="#createNewAccount" text="Create new Account" textFill="#585e67" AnchorPane.bottomAnchor="9.0">
                <font>
                   <Font name="System Bold" size="13.0" />
                </font>

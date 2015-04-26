@@ -31,6 +31,7 @@ import javax.xml.bind.Unmarshaller;
 
 import model.Customer;
 import model.CustomerListWrapper;
+import model.Order;
 import model.Product;
 
 
@@ -39,15 +40,16 @@ public class MainApp extends Application {
 	private Stage primaryStage, mainStage, customerStage, passwordStage;
 	private Scene loginScene, rootScene, orderScene, customerScene, passwordScene, addCustomerScene;
 	private BorderPane rootLayout;
-	private AnchorPane mainView, viewOrder, customerPane, addCustomer, loginView, passwordPane;
+	private AnchorPane mainView, viewBasket, customerPane, addCustomer, loginView, passwordPane, orderPane;
 	
-	private LoginViewController loginViewController;
-	private mainViewController mainViewController;
-	private CartController cartController;
+	private LoginController loginViewController;
+	private MainViewController mainViewController;
+	private BasketController cartController;
 	private CustomerController customerController;
 	private AddCustomerController addCustomerController;
 	private RootLayoutController rootLayoutController;
 	private PasswordController passwordController;
+	private OrderController orderController;
 	
 	File customerFile = new File("/Users/agentjs/Documents/Untitled.xml");
 	File orderFile = new File("/Users/agentjs/Documents/orders");
@@ -107,6 +109,7 @@ public class MainApp extends Application {
 			rootLayout = loader.load();
 			mainStage = new Stage();
 			mainStage.setTitle("Shopping Client");
+			mainStage.getIcons().add(new Image("file:resources/images/icon.png"));
 			mainStage.setMinWidth(1000.00);
 			mainStage.setMinHeight(600.00);
 			Scene rootScene = new Scene(rootLayout);
@@ -142,40 +145,40 @@ public class MainApp extends Application {
 		}	
 	}
 	
-	// shows the actual order view
-	public void showViewOrder() {
+	// shows the actual basket view
+	public void showViewBasket(Customer customer) {
 		try{
 	        // Load CartView.fxml from 'view' package
-	        FXMLLoader loader = new FXMLLoader(MainApp.class.getResource("/view/CartView.fxml"));
-	        viewOrder = (AnchorPane) loader.load();
+	        FXMLLoader loader = new FXMLLoader(MainApp.class.getResource("/view/BasketView.fxml"));
+	        viewBasket = (AnchorPane) loader.load();
 	        
 	        // Set the scene
-	        Stage orderStage = new Stage();
-	        orderStage.setTitle("Your Order");
-	        orderStage.initModality(Modality.WINDOW_MODAL);
-	        orderStage.initOwner(mainStage);
-	        Scene orderScene = new Scene(viewOrder);
-	        orderStage.setScene(orderScene);
+	        Stage basketStage = new Stage();
+	        basketStage.setTitle("Your Basket");
+	        basketStage.initModality(Modality.WINDOW_MODAL);
+	        basketStage.initOwner(mainStage);
+	        Scene orderScene = new Scene(viewBasket);
+	        basketStage.setScene(orderScene);
 	        
 	        // Give the input Person to the controller
 	        cartController = loader.getController();
-	        cartController.setEditStage(orderStage);
-	        cartController.setMainApp(this);
+	        cartController.setEditStage(basketStage);
+	        cartController.setMainApp(this, customer);
 	        cartController.getPrice();
 	        
 	        // Display the CartView view and wait for user to close it
-	        orderStage.showAndWait();
+	        basketStage.showAndWait();
 	    } catch (IOException e){
 	        e.printStackTrace();
 	    }
 	}
 	
-	// empty order list
-	private ObservableList<Product> orderList = FXCollections.observableArrayList();
+	// empty basket list
+	private ObservableList<Product> basketList = FXCollections.observableArrayList();
 	
-	// adds a product to the order list
-	public void addOrder(Product product, int quantity) {
-		orderList.add(new Product(product.getName(), product.getPrice(), product.getCategory(), product.getImage()));
+	// adds a product to the basket list
+	public void addBasket(Product product, int quantity) {
+		basketList.add(new Product(product.getName(), product.getPrice()*quantity, product.getCategory(), product.getImage(), quantity));
 	}
 	
 	public void removeCustomer(Customer customer) {
@@ -185,13 +188,13 @@ public class MainApp extends Application {
 		this.showLoginView();
 	}
 
-	public ObservableList<Product> getOrderList(){ return orderList; }
+	public ObservableList<Product> getBasketList(){ return basketList; }
 	
 	// calculates the total price of the order
     public double getTotalPrice() {
     	double price = 0;
-    	for (int i=0; i<getOrderList().size();i++) {
-    		price = price + getOrderList().get(i).getPrice();
+    	for (int i=0; i<getBasketList().size();i++) {
+    		price = price + getBasketList().get(i).getPrice();
     	}
     	price = Math.round(price * 100);
     	price = price / 100;
@@ -202,6 +205,8 @@ public class MainApp extends Application {
 		mainViewController.setLabelText();
 	}
 	
+
+	
 	public void showCustomer(Customer customer) {
 		try{
 	        // Load CustomerView.fxml from 'view' package
@@ -211,7 +216,7 @@ public class MainApp extends Application {
 	        Scene customerScene = new Scene(customerPane);
 	        //primaryStage.initOwner(mainStage);
 	        //primaryStage.initModality(Modality.WINDOW_MODAL);
-	        primaryStage.setTitle("Your Profile");
+	        primaryStage.setTitle("My Profile");
 	        primaryStage.setScene(customerScene);
 	        
 	        // Give the input Person to the controller
@@ -227,10 +232,44 @@ public class MainApp extends Application {
 	    }
 	}
 	
+	// empty basket list
+	private ObservableList<Order> orderList = FXCollections.observableArrayList();
+		
+	// creates a order for the customer and saves it to the orderList
+	public void saveOrder(Customer customer, double totalSum, String date) {
+		orderList.add(new Order(customer, totalSum, date));
+	}
+	
+	public ObservableList<Order> getOrderList(){ return orderList; }
+	
+	public void showOrder(Customer customer) {
+		try{
+	        // Load CustomerView.fxml from 'view' package
+	        FXMLLoader loader = new FXMLLoader(MainApp.class.getResource("/view/OrderView.fxml"));
+	        orderPane = (AnchorPane) loader.load();
+	        
+	        Scene orderScene = new Scene(orderPane);
+	        //primaryStage.initOwner(mainStage);
+	        //primaryStage.initModality(Modality.WINDOW_MODAL);
+	        primaryStage.setTitle("My Orders");
+	        primaryStage.setScene(orderScene);
+	        
+	        // Give the input Person to the controller
+	        orderController = loader.getController();
+	        orderController.setPrimaryStage(primaryStage);
+	        orderController.setMainApp(this, customer);
+	        
+	        // Display the CustomerProfile view and wait for user to close it
+	        primaryStage.show();
+	    } catch (IOException e){
+	        e.printStackTrace();
+	    }
+	}
+	
 	public void showPassword(Customer customer) {
 		try{
 	        // Load Password.fxml from 'view' package
-	        FXMLLoader loader = new FXMLLoader(MainApp.class.getResource("/view/Password.fxml"));
+	        FXMLLoader loader = new FXMLLoader(MainApp.class.getResource("/view/PasswordView.fxml"));
 	        passwordPane = (AnchorPane) loader.load();
 	        
 	        Scene passwordScene = new Scene(passwordPane);
@@ -329,7 +368,7 @@ public class MainApp extends Application {
 	public void addCustomer(Customer customer) {
 		try{
 	        // Load AddCustomer.fxml from 'view' package
-			FXMLLoader loader = new FXMLLoader(MainApp.class.getResource("/view/AddCustomer.fxml"));
+			FXMLLoader loader = new FXMLLoader(MainApp.class.getResource("/view/AddCustomerView.fxml"));
 	        addCustomer = (AnchorPane) loader.load();
 	        
 	        // Create new scene and set to primaryStage

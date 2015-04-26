@@ -8,44 +8,73 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="600.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tableView.mainViewController">
+<AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="600.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tableView.MainViewController">
    <children>
       <SplitPane dividerPositions="0.3088888888888889" layoutX="131.0" layoutY="126.0" orientation="VERTICAL" prefHeight="482.0" prefWidth="687.0" style="-fx-background-color: white;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
         <items>
-          <AnchorPane maxHeight="200.0" minHeight="150.0" minWidth="0.0" style="-fx-background-color: A3D1FF;">
+          <AnchorPane maxHeight="200.0" minHeight="150.0" minWidth="0.0" style="-fx-background-color: white;">
                <children>
-                  <Region layoutX="14.0" layoutY="57.0" prefHeight="45.0" style="-fx-background-color: black;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
-                  <HBox alignment="CENTER_LEFT" prefHeight="45.0" spacing="10.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
+                  <Region layoutX="14.0" layoutY="57.0" prefHeight="50.0" style="-fx-background-color: purple;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                  <HBox alignment="CENTER_LEFT" prefHeight="50.0" spacing="10.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
                      <children>
-                        <Button layoutY="1.0" mnemonicParsing="false" onAction="#handleViewCustomer" style="-fx-background-radius: 0; -fx-background-color: white;" text="Profile" />
-                        <Label layoutX="73.0" layoutY="6.0" text="Logged in as: " textFill="WHITE" AnchorPane.leftAnchor="73.0" />
-                        <Label fx:id="customerName" layoutX="157.0" layoutY="6.0" text="CustomerName" textFill="WHITE" AnchorPane.topAnchor="6.0" />
+                        <Button layoutY="1.0" minHeight="25.0" mnemonicParsing="false" onAction="#handleViewCustomer" style="-fx-background-radius: 0; -fx-background-color: white;" text="Profile">
+                           <font>
+                              <Font name="Avenir Roman" size="15.0" />
+                           </font></Button>
+                        <Label layoutX="73.0" layoutY="6.0" text="Logged in as: " textFill="WHITE" AnchorPane.leftAnchor="73.0">
+                           <font>
+                              <Font name="Avenir Roman" size="16.0" />
+                           </font></Label>
+                        <Label fx:id="customerName" layoutX="157.0" layoutY="6.0" text="CustomerName" textFill="WHITE" AnchorPane.topAnchor="6.0">
+                           <font>
+                              <Font name="Avenir Roman" size="16.0" />
+                           </font></Label>
                      </children>
                      <padding>
                         <Insets left="15.0" />
                      </padding>
                   </HBox>
-                  <HBox alignment="CENTER_RIGHT" prefHeight="45.0" spacing="10.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                  <HBox alignment="CENTER_RIGHT" prefHeight="50.0" spacing="10.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                      <children>
-                        <HBox alignment="CENTER" prefHeight="40.0" prefWidth="105.0" spacing="10.0">
+                        <HBox alignment="CENTER" prefHeight="50.0" prefWidth="105.0" spacing="10.0">
                            <children>
                               <Label text="Order: " textFill="WHITE">
                                  <padding>
                                     <Insets right="20.0" />
                                  </padding>
+                                 <font>
+                                    <Font name="Avenir Roman" size="16.0" />
+                                 </font>
                               </Label>
-                              <Label fx:id="items" alignment="CENTER_RIGHT" text="0" textFill="WHITE" />
+                              <Label fx:id="items" alignment="CENTER_RIGHT" text="0" textFill="WHITE">
+                                 <font>
+                                    <Font name="Avenir Roman" size="16.0" />
+                                 </font></Label>
                            </children>
                         </HBox>
-                        <HBox alignment="CENTER" prefHeight="40.0" prefWidth="158.0" spacing="30.0">
+                        <HBox alignment="CENTER" prefHeight="50.0" prefWidth="158.0" spacing="30.0">
                            <children>
-                              <Label layoutX="509.0" layoutY="40.0" text="Subtotal: " textFill="WHITE" />
-                              <Label fx:id="totalSum" text="£0.00" textFill="WHITE" />
+                              <Label layoutX="509.0" layoutY="40.0" text="Subtotal: " textFill="WHITE">
+                                 <font>
+                                    <Font name="Avenir Roman" size="16.0" />
+                                 </font></Label>
+                              <Label fx:id="totalSum" text="£0.00" textFill="WHITE">
+                                 <font>
+                                    <Font name="Avenir Roman" size="16.0" />
+                                 </font></Label>
                            </children>
                         </HBox>
-                        <HBox alignment="CENTER_RIGHT">
+                        <HBox alignment="CENTER_RIGHT" prefHeight="50.0" spacing="10.0">
                            <children>
-                              <Button fx:id="showCart" alignment="CENTER" layoutX="703.0" layoutY="71.0" mnemonicParsing="false" onAction="#handleViewOrder" style="-fx-background-radius: 0; -fx-background-color: white;" text="My Basket" />
+                              <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../../../../Google%20Drive/MIT/Spring/G52GUI/Coursework%201/shopping_cart_shopping_cart.png" />
+                                 </image>
+                              </ImageView>
+                              <Button fx:id="showCart" alignment="CENTER" layoutX="703.0" layoutY="71.0" mnemonicParsing="false" onAction="#handleViewOrder" style="-fx-background-radius: 0; -fx-background-color: white;" text="My Basket">
+                                 <font>
+                                    <Font name="Avenir Roman" size="15.0" />
+                                 </font></Button>
                            </children>
                         </HBox>
                      </children>
@@ -53,9 +82,9 @@
                         <Insets right="15.0" />
                      </padding>
                   </HBox>
-                  <VBox alignment="CENTER" layoutX="250.0" layoutY="57.0" spacing="10.0" AnchorPane.leftAnchor="40.0" AnchorPane.rightAnchor="40.0">
+                  <VBox alignment="CENTER" layoutX="40.0" layoutY="64.0" spacing="10.0" AnchorPane.leftAnchor="40.0" AnchorPane.rightAnchor="40.0">
                      <children>
-                        <TextField fx:id="search" maxWidth="400.0" prefHeight="26.0" prefWidth="300.0" promptText="Search for articles" />
+                        <TextField fx:id="search" maxWidth="400.0" prefHeight="30.0" prefWidth="300.0" promptText="Search for articles" style="-fx-background-radius: 0;" />
                         <VBox maxWidth="400.0" spacing="10.0">
                            <children>
                               <Label layoutX="250.0" layoutY="71.0" text="Categories:" />
@@ -76,14 +105,17 @@
                <children>
                   <SplitPane dividerPositions="0.5693430656934306" focusTraversable="false" prefHeight="340.0" prefWidth="798.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                     <items>
-                      <AnchorPane>
+                      <AnchorPane style="-fx-background-color: white;">
                            <children>
                               <HBox>
                                  <children>
                                     <Label prefHeight="25.0" prefWidth="234.0" text="Product Catalogue">
                                        <font>
-                                          <Font size="20.0" />
+                                          <Font name="Avenir Roman" size="20.0" />
                                        </font>
+                                       <padding>
+                                          <Insets left="20.0" />
+                                       </padding>
                                     </Label>
                                  </children>
                               </HBox>
@@ -97,20 +129,15 @@
                                     <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
                                  </columnResizePolicy>
                               </TableView>
-                              <Button layoutX="234.0" layoutY="1.0" mnemonicParsing="false" onAction="#handleViewPassword" text="Password" />
                            </children>
                         </AnchorPane>
-                      <AnchorPane minHeight="0.0" minWidth="0.0">
+                      <AnchorPane minHeight="0.0" minWidth="0.0" style="-fx-background-color: white;">
                            <children>
                               <ComboBox fx:id="comboQuantity" prefHeight="26.0" prefWidth="99.0" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="300.0" />
                               <Button fx:id="addToCart" layoutX="221.0" layoutY="284.0" mnemonicParsing="false" onAction="#handleAddToCart" text="Add to cart" AnchorPane.bottomAnchor="30.0" AnchorPane.rightAnchor="40.0" />
                               <VBox alignment="CENTER" layoutX="255.0" layoutY="20.0" maxWidth="0.0" minHeight="200.0" minWidth="200.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="20.0">
                                  <children>
-                                    <ImageView fx:id="imageView" fitHeight="153.0" fitWidth="150.0" layoutX="255.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="20.0">
-                                       <image>
-                                          <Image url="@../../resources/images/icon.png" />
-                                       </image>
-                                    </ImageView>
+                                    <ImageView fx:id="imageView" fitHeight="153.0" fitWidth="150.0" layoutX="255.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="20.0" />
                                  </children>
                               </VBox>
                               <Label fx:id="name" layoutX="33.0" layoutY="44.0" text="pName" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="30.0">
@@ -131,7 +158,37 @@
                               </HBox>
                               <Label layoutX="16.0" layoutY="178.0" text="Description:" AnchorPane.leftAnchor="20.0" />
                               <Label layoutX="20.0" layoutY="215.0" text="description" AnchorPane.leftAnchor="20.0" />
-                              <TextFlow layoutX="138.0" layoutY="178.0" prefHeight="200.0" prefWidth="200.0" />
+                              <HBox alignment="CENTER_LEFT" layoutX="205.0" layoutY="204.0" spacing="5.0" AnchorPane.rightAnchor="60.0">
+                                 <children>
+                                    <ImageView fx:id="ratingOne" fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" visible="false">
+                                       <image>
+                                          <Image url="@../../../../Google%20Drive/MIT/Spring/G52GUI/Coursework%201/rating_icon-01.png" />
+                                       </image>
+                                    </ImageView>
+                                    <ImageView fx:id="ratingTwo" fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" visible="false">
+                                       <image>
+                                          <Image url="@../../../../Google%20Drive/MIT/Spring/G52GUI/Coursework%201/rating_icon-01.png" />
+                                       </image>
+                                    </ImageView>
+                                    <ImageView fx:id="ratingThree" fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" visible="false">
+                                       <image>
+                                          <Image url="@../../../../Google%20Drive/MIT/Spring/G52GUI/Coursework%201/rating_icon-01.png" />
+                                       </image>
+                                    </ImageView>
+                                    <ImageView fx:id="ratingFour" fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" visible="false">
+                                       <image>
+                                          <Image url="@../../../../Google%20Drive/MIT/Spring/G52GUI/Coursework%201/rating_icon-01.png" />
+                                       </image>
+                                    </ImageView>
+                                    <ImageView fx:id="ratingFive" fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" visible="false">
+                                       <image>
+                                          <Image url="@../../../../Google%20Drive/MIT/Spring/G52GUI/Coursework%201/rating_icon-01.png" />
+                                       </image>
+                                    </ImageView>
+                                 </children>
+                              </HBox>
+                              <ComboBox fx:id="comboRating" layoutX="230.0" layoutY="250.0" onAction="#handleRating" AnchorPane.rightAnchor="145.0" />
+                              <Label layoutX="231.0" layoutY="230.0" prefHeight="16.0" prefWidth="150.0" text="Rate this product:" AnchorPane.rightAnchor="44.0" />
                            </children>
                         </AnchorPane>
                     </items>

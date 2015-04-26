@@ -10,7 +10,7 @@ import javafx.scene.control.PasswordField;
 import javafx.stage.Stage;
 import model.Customer;
 
-public class LoginViewController {
+public class LoginController {
 
     @FXML private Button loginButton;
     @FXML private PasswordField passwordNode;
