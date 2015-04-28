@@ -10,11 +10,11 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="500.0" style="-fx-background-color: #white;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tableView.LoginController">
+<AnchorPane id="anchorPane" prefHeight="400.0" prefWidth="500.0" stylesheets="@Style.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tableView.LoginController">
    <children>
-      <AnchorPane layoutY="-3.0" prefHeight="414.0" prefWidth="500.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="-3.0">
+      <AnchorPane layoutY="-3.0" prefHeight="414.0" prefWidth="500.0" stylesheets="@Style.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <VBox alignment="BOTTOM_CENTER" prefHeight="200.0" prefWidth="300.0" AnchorPane.bottomAnchor="50.0" AnchorPane.leftAnchor="80.0" AnchorPane.rightAnchor="80.0" AnchorPane.topAnchor="50.0">
+            <VBox alignment="BOTTOM_CENTER" prefHeight="200.0" prefWidth="300.0" AnchorPane.bottomAnchor="30.0" AnchorPane.leftAnchor="80.0" AnchorPane.rightAnchor="80.0" AnchorPane.topAnchor="30.0">
                <children>
                   <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -24,14 +24,15 @@
                         <Insets bottom="30.0" />
                      </VBox.margin>
                   </ImageView>
-                  <ComboBox fx:id="customerComboBox" prefHeight="35.0" prefWidth="408.0" style="-fx-background-radius: 0; -fx-background-color: white; -fx-border-color: grey;" />
-                  <PasswordField fx:id="passwordNode" onAction="#loginAction" prefHeight="35.0" prefWidth="340.0" promptText="Password" style="-fx-background-color: #white; -fx-background-radius: 0;">
+                  <ComboBox fx:id="customerComboBox" prefHeight="35.0" prefWidth="408.0" />
+                  <PasswordField fx:id="passwordNode" prefHeight="35.0" prefWidth="340.0" promptText="Password" style="-fx-background-radius: 0;">
                      <VBox.margin>
                         <Insets top="20.0" />
-                     </VBox.margin></PasswordField>
+                     </VBox.margin>
+                  </PasswordField>
                   <HBox alignment="CENTER" prefHeight="0.0" prefWidth="300.0">
                      <children>
-                        <Button fx:id="cancelButton" minHeight="-Infinity" mnemonicParsing="false" onAction="#handleCancel" prefHeight="30.0" prefWidth="70.0" style="-fx-background-color: #585e67;" text="Cancel" textFill="WHITE">
+                        <Button fx:id="cancelButton" cancelButton="true" minHeight="-Infinity" mnemonicParsing="false" onAction="#handleCancel" prefHeight="30.0" prefWidth="70.0" text="Cancel" textFill="WHITE">
                            <HBox.margin>
                               <Insets right="20.0" />
                            </HBox.margin>
@@ -39,19 +40,24 @@
                               <Font name="System Bold" size="13.0" />
                            </font>
                         </Button>
-                        <Button fx:id="LoginButton" minHeight="-Infinity" mnemonicParsing="false" onAction="#loginAction" prefHeight="30.0" prefWidth="70.0" style="-fx-background-color: #585e67;" text="Login" textFill="WHITE">
+                        <Button fx:id="LoginButton" defaultButton="true" minHeight="-Infinity" mnemonicParsing="false" onAction="#loginAction" prefHeight="30.0" prefWidth="70.0" text="Login" textFill="WHITE">
                            <font>
                               <Font name="System Bold" size="13.0" />
-                           </font></Button>
+                           </font>
+                        </Button>
                      </children>
                      <VBox.margin>
                         <Insets top="20.0" />
                      </VBox.margin>
                   </HBox>
-                  <Label fx:id="information" textFill="RED" />
+                  <Label fx:id="information" textFill="RED">
+                     <VBox.margin>
+                        <Insets top="20.0" />
+                     </VBox.margin>
+                  </Label>
                </children>
             </VBox>
-            <Label layoutX="14.0" layoutY="378.0" onMouseClicked="#createNewAccount" text="Create new Account" textFill="#585e67" AnchorPane.bottomAnchor="9.0">
+            <Label id="createAccountLabel" layoutX="14.0" layoutY="378.0" onMouseClicked="#createNewAccount" text="Create new Account" textFill="#585e67" AnchorPane.bottomAnchor="9.0">
                <font>
                   <Font name="System Bold" size="13.0" />
                </font>

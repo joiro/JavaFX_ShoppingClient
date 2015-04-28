@@ -8,17 +8,17 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="370.0" prefWidth="600.0" style="-fx-background-color: A3D1FF;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tableView.CustomerController">
+<AnchorPane id="anchorPane" prefHeight="370.0" prefWidth="600.0" stylesheets="@Style.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tableView.CustomerController">
    <children>
-      <AnchorPane prefHeight="400.0" prefWidth="500.0" style="-fx-background-color: white;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <AnchorPane id="anchorPane" prefHeight="400.0" prefWidth="500.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <Region layoutX="101.0" layoutY="-48.0" prefHeight="60.0" style="-fx-background-color: purple;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
-            <Label contentDisplay="CENTER" prefHeight="60.0" text="Profile" textFill="WHITE" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <Region id="region" layoutX="101.0" layoutY="-48.0" prefHeight="60.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+            <Label id="title" contentDisplay="CENTER" prefHeight="60.0" text="Profile" textFill="WHITE" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                <font>
                   <Font name="Avenir Roman" size="35.0" />
                </font>
             </Label>
-            <Label fx:id="firstName" layoutX="30.0" layoutY="70.0" text="name" AnchorPane.leftAnchor="40.0">
+            <Label id="nameLabel" fx:id="firstName" layoutX="30.0" layoutY="70.0" text="name" AnchorPane.leftAnchor="40.0">
                <font>
                   <Font name="Avenir Roman" size="24.0" />
                </font>

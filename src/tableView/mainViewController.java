@@ -22,6 +22,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import model.Customer;
 import model.Product;
+import model.ProductDescription;
 
 public class MainViewController {
 	@FXML private TableView<Product> tableView;
@@ -39,6 +40,7 @@ public class MainViewController {
     @FXML private ComboBox<Integer> comboRating;
 	
 	private MainApp mainApp;
+	private ProductDescription productDescription = new ProductDescription();
 	private BasketController controller;
 	private int quant, rating;
 	private List<Integer> ratingArray;
@@ -107,15 +109,15 @@ public class MainViewController {
 	public MainViewController() { }
 	
 	public void addToList() {
-		productData.add(new Product("Banana", 0.39, "Food", "http://assets.eatingwell.com/sites/default/files/imagecache/310_square/bananas_1.jpg", 1));
-		productData.add(new Product("Apple", 0.19, "Food", "http://ecx.images-amazon.com/images/I/11KOCxUWAqL.jpg", 1));
-		productData.add(new Product("Milk", 1.39, "Food", "http://ecx.images-amazon.com/images/I/41rNYPLQTlL._SL500_SS115_.jpg", 1));
-		productData.add(new Product("Cheddar Cheese", 2.79, "Food", "http://ecx.images-amazon.com/images/I/51A-P9ReGSL._SX466_.jpg", 1));
-		productData.add(new Product("Butter", 1.09, "Food", "http://www.allmystery.de/i/t74d7de_fette_oele_butter_2.jpg", 1));
-		productData.add(new Product("IPhone 6 16GB grey", 549.99, "Electronics", "http://ecx.images-amazon.com/images/I/51eclIdmTuL.jpg", 1));
-		productData.add(new Product("Panasonic 42' LCD Tv", 499.99, "Electronics", "http://ecx.images-amazon.com/images/I/71o-i0JC1GL._SL1500_.jpg", 1));
-		productData.add(new Product("Apple IPad Air 16GB white", 399.99, "Electronics", "http://ecx.images-amazon.com/images/I/51b-LjnkFJL._SY355_.jpg", 1));
-		productData.add(new Product("Mountainbike 'Trackmaster'", 699.99, "Sports", "http://ecx.images-amazon.com/images/I/61PdltjOCfL._SX522_.jpg", 1));
+		productData.add(new Product("Banana", 0.39, "Food", productDescription.getProductDescription("Banana"), "http://assets.eatingwell.com/sites/default/files/imagecache/310_square/bananas_1.jpg", 1));
+		productData.add(new Product("Red Apple", 0.19, "Food", productDescription.getProductDescription("Apple"), "http://ecx.images-amazon.com/images/I/11KOCxUWAqL.jpg", 1));
+		productData.add(new Product("1l Whole Milk", 1.39, "Food", productDescription.getProductDescription("Milk"), "http://ecx.images-amazon.com/images/I/41rNYPLQTlL._SL500_SS115_.jpg", 1));
+		productData.add(new Product("Cheddar Cheese", 2.79, "Food", productDescription.getProductDescription("Cheddar"), "http://ecx.images-amazon.com/images/I/51A-P9ReGSL._SX466_.jpg", 1));
+		productData.add(new Product("Butter", 1.09, "Food", productDescription.getProductDescription("Butter"), "http://www.allmystery.de/i/t74d7de_fette_oele_butter_2.jpg", 1));
+		productData.add(new Product("Apple IPhone 6 16GB grey", 549.99, "Electronics", productDescription.getProductDescription("Iphone"), "http://ecx.images-amazon.com/images/I/51eclIdmTuL.jpg", 1));
+		productData.add(new Product("Panasonic 42' LCD Tv", 499.99, "Electronics", productDescription.getProductDescription("Tv"), "http://ecx.images-amazon.com/images/I/71o-i0JC1GL._SL1500_.jpg", 1));
+		productData.add(new Product("Apple IPad Air 16GB white", 399.99, "Electronics", productDescription.getProductDescription("Ipad"), "http://ecx.images-amazon.com/images/I/51b-LjnkFJL._SY355_.jpg", 1));
+		productData.add(new Product("Mountainbike 'Trackmaster'", 699.99, "Sports", productDescription.getProductDescription("Bike"), "http://ecx.images-amazon.com/images/I/61PdltjOCfL._SX522_.jpg", 1));
 	}
     
     private void showProductDetails(Product Product){
@@ -128,7 +130,7 @@ public class MainViewController {
             category.setText(Product.getCategory());
             Image productImage = new Image(Product.getImage());
             imageView.setImage(productImage);
-            
+            description.setText(Product.getDescription());
             calculateRating();
 
         } else{
@@ -200,6 +202,7 @@ public class MainViewController {
         		ratingFive.setVisible(false);
         		break;
         }
+        //comboRating.getSelectionModel().select(null);
     }
     
     @FXML public void setLabelText() {
@@ -233,8 +236,10 @@ public class MainViewController {
 		comboQuantity.getItems().addAll(1,2,3,4,5,6,7,8,9,10);
 		comboQuantity.getSelectionModel().select(0);
 		comboRating.getItems().addAll(1,2,3,4,5);
+		comboRating.getSelectionModel().select(null);
 	}
     
+	// contains the products displayed in mainView
 	private ObservableList<Product> productData = FXCollections.observableArrayList();
 	
 	public ObservableList<Product> getProductData() { return productData; }

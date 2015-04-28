@@ -15,6 +15,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.SplitPane;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
@@ -32,8 +33,8 @@ import javax.xml.bind.Unmarshaller;
 import model.Customer;
 import model.CustomerListWrapper;
 import model.Order;
+import model.OrderListWrapper;
 import model.Product;
-
 
 public class MainApp extends Application {
 	
@@ -51,8 +52,8 @@ public class MainApp extends Application {
 	private PasswordController passwordController;
 	private OrderController orderController;
 	
-	File customerFile = new File("/Users/agentjs/Documents/Untitled.xml");
-	File orderFile = new File("/Users/agentjs/Documents/orders");
+	File customerFile = new File("resources/customers.xml");
+	File orderFile = new File("resources/orders.xml");
 	
 	public static void main(String[] args) { launch(args); }
 
@@ -61,7 +62,7 @@ public class MainApp extends Application {
 		this.primaryStage = primaryStage;
 		this.primaryStage.setResizable(false);
 		this.primaryStage.getIcons().add(new Image("file:resources/images/icon.png"));
-		this.loadCustomerFromFile(customerFile);
+		this.loadFile(customerFile);
 		
 		// display the login window
 		showLoginView();		
@@ -78,14 +79,13 @@ public class MainApp extends Application {
             FXMLLoader loader = new FXMLLoader(MainApp.class.getResource("/view/LoginView.fxml"));
             loginView = (AnchorPane) loader.load();
             
-            // Give the controller access to MainApp
+            // Give the controller access to MainApp and primaryStage
             loginViewController = loader.getController();
             loginViewController.setApp(this);
             loginViewController.setPrimaryStage(primaryStage);
             
             // Set the scene
             Scene loginScene = new Scene(loginView);
-            loginScene.setFill(Color.TRANSPARENT);
             primaryStage.setTitle("Customer Login");
             primaryStage.setScene(loginScene);
             primaryStage.show();
@@ -94,7 +94,7 @@ public class MainApp extends Application {
             e.printStackTrace();
         }
 	}
-	
+	// handles change from loginView to mainView
     public void callMainView(Customer customer) throws Exception{
         this.showRootLayout(customer);
 		System.out.println("callMainView");
@@ -116,7 +116,7 @@ public class MainApp extends Application {
 			mainStage.setScene(rootScene);
 			mainStage.show();
 			
-            // Give the controller access to MainApp
+            // Give the controller access to MainApp and mainStage
             rootLayoutController = loader.getController();
             rootLayoutController.setMainApp(this);
             rootLayoutController.setMainStage(mainStage);
@@ -125,25 +125,44 @@ public class MainApp extends Application {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		showProductOverview(customer);
+		// calls the MainView to be loaded in the mainStage
+		showMainView(customer);
 	}
 
 	// shows the main window with product catalogue
-	public void showProductOverview(Customer customer) {
+	public void showMainView(Customer customer) {
 		try {
 			// Load MainView.fxml from 'view' package
 			FXMLLoader loader = new FXMLLoader(MainApp.class.getResource("/view/MainView.fxml"));
 			mainView = (AnchorPane) loader.load();
 			rootLayout.setCenter(mainView);
 			
-			// Give the controller access to the main app
+			// Give the controller access to the main app and 
+	        // sends information about the logged-in customer
 	        mainViewController = loader.getController();
 	        mainViewController.setMainApp(this, customer);
+	        
+	        final SplitPane splitPane = new SplitPane();
+	        splitPane.lookupAll("splitPaneOne").stream()
+            .forEach(div ->  div.setMouseTransparent(true) );
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}	
 	}
+
+// BASKET HANDLING
+	
+	// empty basket list
+	private ObservableList<Product> basketList = FXCollections.observableArrayList();
+	
+	// adds a product to the basket list, including it's selected quantity
+	public void addBasket(Product product, int quantity) {
+		basketList.add(new Product(product.getName(), product.getPrice()*quantity, null, product.getCategory(), product.getImage(), quantity));
+	}
+
+	// gives access to the basketList
+	public ObservableList<Product> getBasketList(){ return basketList; }
 	
 	// shows the actual basket view
 	public void showViewBasket(Customer customer) {
@@ -155,12 +174,13 @@ public class MainApp extends Application {
 	        // Set the scene
 	        Stage basketStage = new Stage();
 	        basketStage.setTitle("Your Basket");
-	        basketStage.initModality(Modality.WINDOW_MODAL);
+	        //basketStage.initModality(Modality.WINDOW_MODAL);
 	        basketStage.initOwner(mainStage);
 	        Scene orderScene = new Scene(viewBasket);
 	        basketStage.setScene(orderScene);
 	        
-	        // Give the input Person to the controller
+	        // Give the controller access to the MainApp and basketStage and 
+	        // sends information about the logged-in customer
 	        cartController = loader.getController();
 	        cartController.setEditStage(basketStage);
 	        cartController.setMainApp(this, customer);
@@ -173,24 +193,7 @@ public class MainApp extends Application {
 	    }
 	}
 	
-	// empty basket list
-	private ObservableList<Product> basketList = FXCollections.observableArrayList();
-	
-	// adds a product to the basket list
-	public void addBasket(Product product, int quantity) {
-		basketList.add(new Product(product.getName(), product.getPrice()*quantity, product.getCategory(), product.getImage(), quantity));
-	}
-	
-	public void removeCustomer(Customer customer) {
-		customerList.remove(customer);
-		this.saveCustomerToFile(customerFile);
-		mainStage.close();
-		this.showLoginView();
-	}
-
-	public ObservableList<Product> getBasketList(){ return basketList; }
-	
-	// calculates the total price of the order
+	// calculates the total price of the order and rounds the double to 2 decimals
     public double getTotalPrice() {
     	double price = 0;
     	for (int i=0; i<getBasketList().size();i++) {
@@ -201,43 +204,22 @@ public class MainApp extends Application {
     	return price;
     }
 
+    // updates the totalPrice label in Mainview / BasketView
 	public void updateUIMainView() {
 		mainViewController.setLabelText();
 	}
 	
 
 	
-	public void showCustomer(Customer customer) {
-		try{
-	        // Load CustomerView.fxml from 'view' package
-	        FXMLLoader loader = new FXMLLoader(MainApp.class.getResource("/view/CustomerView.fxml"));
-	        customerPane = (AnchorPane) loader.load();
-	        
-	        Scene customerScene = new Scene(customerPane);
-	        //primaryStage.initOwner(mainStage);
-	        //primaryStage.initModality(Modality.WINDOW_MODAL);
-	        primaryStage.setTitle("My Profile");
-	        primaryStage.setScene(customerScene);
-	        
-	        // Give the input Person to the controller
-	        customerController = loader.getController();
-	        customerController.setPrimaryStage(primaryStage);
-	        customerController.showCustomerDetails(customer);
-	        customerController.setMainApp(this, customer);
-	        
-	        // Display the CustomerProfile view and wait for user to close it
-	        primaryStage.show();
-	    } catch (IOException e){
-	        e.printStackTrace();
-	    }
-	}
+// ORDER HANDLING
 	
 	// empty basket list
 	private ObservableList<Order> orderList = FXCollections.observableArrayList();
 		
 	// creates a order for the customer and saves it to the orderList
 	public void saveOrder(Customer customer, double totalSum, String date) {
-		orderList.add(new Order(customer, totalSum, date));
+		String sum = Double.toString(totalSum);
+		orderList.add(new Order(customer, sum, date));
 	}
 	
 	public ObservableList<Order> getOrderList(){ return orderList; }
@@ -290,80 +272,39 @@ public class MainApp extends Application {
 	public void updateLoginUI() {
 		this.loginViewController.setApp(this);
 	}
+
 	
-	public File getCustomerFilePath() {
-	    Preferences prefs = Preferences.userNodeForPackage(MainApp.class);
-	    String filePath = prefs.get("filePath", null);
-	    if (filePath != null) {
-	        return new File(filePath);
-	    } else {
-	        return null;
-	    }
-	}
-	
-	public void setCustomerFilePath(File file) {
-	    Preferences prefs = Preferences.userNodeForPackage(MainApp.class);
-	    if (file != null) {
-	        prefs.put("filePath", file.getPath());
-	    } else {
-	        prefs.remove("filePath");
-	    }
-	}
-	
-	
-	public void loadCustomerFromFile(File file) {
-	    try {
-	        JAXBContext context = JAXBContext.newInstance(CustomerListWrapper.class);
-	        Unmarshaller um = context.createUnmarshaller();
-
-	        // Reading XML from the file and unmarshalling.
-	        CustomerListWrapper wrapper = (CustomerListWrapper) um.unmarshal(file);
-
-	        customerList.clear();
-	        customerList.addAll(wrapper.getCustomer());
-
-	        // Save the file path to the registry.
-	        //setPersonFilePath(file);
-
-	    } catch (Exception e) { // catches ANY exception
-	        Alert alert = new Alert(AlertType.ERROR);
-	        alert.setTitle("Error");
-	        alert.setHeaderText("Could not load data");
-	        alert.setContentText("Could not load data from file:\n" + file.getPath());
-
-	        alert.showAndWait();
-	    }
-	}
-	
-	public void saveCustomerToFile(File file) {
-	    try {
-	        JAXBContext context = JAXBContext
-	                .newInstance(CustomerListWrapper.class);
-	        Marshaller m = context.createMarshaller();
-	        m.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
-
-	        // Wrapping our person data.
-	        CustomerListWrapper wrapper = new CustomerListWrapper();
-	        wrapper.setCustomer(customerList);
-
-	        // Marshalling and saving XML to the file.
-	        m.marshal(wrapper, file);
-
-	        // Save the file path to the registry.
-	        //setPersonFilePath(file);
-	    } catch (Exception e) { // catches ANY exception
-	        Alert alert = new Alert(AlertType.ERROR);
-	        alert.setTitle("Error");
-	        alert.setHeaderText("Could not save data");
-	        alert.setContentText("Could not save data to file:\n" + file.getPath());
-
-	        alert.showAndWait();
-	    }
-	}
+// CUSTOMER HANDLING
 	
 	private ObservableList<Customer> customerList = FXCollections.observableArrayList();
 	
 	public ObservableList<Customer> getCustomerList(){ return customerList; }
+	
+	// shows the customer profile
+	public void showCustomer(Customer customer) {
+		try{
+	        // Load CustomerView.fxml from 'view' package
+	        FXMLLoader loader = new FXMLLoader(MainApp.class.getResource("/view/CustomerView.fxml"));
+	        customerPane = (AnchorPane) loader.load();
+	        
+	        Scene customerScene = new Scene(customerPane);
+	        //primaryStage.initOwner(mainStage);
+	        //primaryStage.initModality(Modality.WINDOW_MODAL);
+	        primaryStage.setTitle("My Profile");
+	        primaryStage.setScene(customerScene);
+	        
+	        // Give the input Person to the controller
+	        customerController = loader.getController();
+	        customerController.setPrimaryStage(primaryStage);
+	        customerController.showCustomerDetails(customer);
+	        customerController.setMainApp(this, customer);
+	        
+	        // Display the CustomerProfile view and wait for user to close it
+	        primaryStage.show();
+	    } catch (IOException e){
+	        e.printStackTrace();
+	    }
+	}
 	
 	public void addCustomer(Customer customer) {
 		try{
@@ -386,4 +327,68 @@ public class MainApp extends Application {
 	        e.printStackTrace();
 	    }
 	}	
+	
+	// called when 'delete profile' in addCustomerView is called
+	// removes the customer entry from the customerList, closes the mainStage and returns to loginView
+	public void removeCustomer(Customer customer) {
+		customerList.remove(customer);
+		this.saveToFile(customerFile);
+		mainStage.close();
+		this.showLoginView();
+	}
+
+	
+// FILE HANDLING
+	
+	public void loadFile(File file) {
+		System.out.println("file: "+file.getName());
+	    try {
+	        JAXBContext context = JAXBContext.newInstance(CustomerListWrapper.class);
+	        Unmarshaller unMarshall = context.createUnmarshaller();
+
+	        // load xml from file and unmarshalling.
+	        CustomerListWrapper wrapper = (CustomerListWrapper) unMarshall.unmarshal(file);
+
+	        customerList.clear();
+	        customerList.addAll(wrapper.getCustomer());
+
+	    } catch (Exception e) { // catches ANY exception
+	        Alert alert = new Alert(AlertType.ERROR);
+	        alert.setTitle("Error");
+	        alert.setHeaderText("File could not get loaded");
+	        alert.setContentText("Could not load file:\n" + file.getPath());
+	        alert.showAndWait();
+	    }
+	}
+	
+	public void saveToFile(File file) {
+	    try {
+//	        JAXBContext context = JAXBContext
+//	                .newInstance(CustomerListWrapper.class);
+//	        Marshaller marshall = context.createMarshaller();
+//	        marshall.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
+
+	        // Wrapping our product data.
+	    	
+        		JAXBContext context = JAXBContext
+                .newInstance(CustomerListWrapper.class);
+        		Marshaller marshall = context.createMarshaller();
+        		marshall.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
+        		CustomerListWrapper wrapper = new CustomerListWrapper();
+        		wrapper.setCustomer(customerList);
+        		marshall.marshal(wrapper, file);
+
+	        //wrapper.setCustomer(customerList);
+
+	        // Marshalling and saving XML to the file.
+	        //marshall.marshal(wrapper, file);
+
+	    } catch (Exception e) { // catches ANY exception
+	        Alert alert = new Alert(AlertType.ERROR);
+	        alert.setTitle("Error");
+	        alert.setHeaderText("File could not get saved");
+	        alert.setContentText("Could not save file:\n" + file.getPath());
+	        alert.showAndWait();
+	    }
+	}
 }

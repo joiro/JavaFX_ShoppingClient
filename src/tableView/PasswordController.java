@@ -28,7 +28,7 @@ public class PasswordController {
 			 if (reenterNewPw.getText().equals(newPw.getText()) && !newPw.getText().isEmpty()) {
 				 System.out.println("new pw: "+newPw.getText());
 				 loggedInCustomer.setPassword(newPw.getText());
-				 mainApp.saveCustomerToFile(mainApp.customerFile);
+				 mainApp.saveToFile(mainApp.customerFile);
 				 mainApp.showCustomer(loggedInCustomer);
 			 } else {
 				 passwordError.setText("Passwords don't match!");

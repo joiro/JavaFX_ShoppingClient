@@ -6,7 +6,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="370.0" prefWidth="600.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tableView.AddCustomerController">
+<AnchorPane id="anchorPane" fx:id="addCustomerPane" prefHeight="370.0" prefWidth="600.0" stylesheets="@Style.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tableView.AddCustomerController">
    <children>
       <GridPane layoutX="43.0" layoutY="41.0" prefHeight="141.0" vgap="25.0" AnchorPane.leftAnchor="40.0" AnchorPane.rightAnchor="40.0" AnchorPane.topAnchor="100.0">
         <columnConstraints>
@@ -24,15 +24,15 @@
          <children>
             <Label text="First name">
                <font>
-                  <Font name="Avenir Roman" size="16.0" />
+                  <Font size="16.0" />
                </font></Label>
             <Label text="Last Name" GridPane.rowIndex="1">
                <font>
-                  <Font name="Avenir Roman" size="16.0" />
+                  <Font size="16.0" />
                </font></Label>
             <Label text="Email Address" GridPane.rowIndex="2">
                <font>
-                  <Font name="Avenir Roman" size="16.0" />
+                  <Font size="16.0" />
                </font></Label>
             <TextField fx:id="firstNameField" promptText="First Name" GridPane.columnIndex="1" />
             <TextField fx:id="lastNameField" promptText="Last Name" GridPane.columnIndex="1" GridPane.rowIndex="1" />
@@ -40,15 +40,15 @@
             <TextField fx:id="streetField" promptText="Street" GridPane.columnIndex="1" GridPane.rowIndex="3" />
             <Label text="Street" GridPane.rowIndex="3">
                <font>
-                  <Font name="Avenir Roman" size="16.0" />
+                  <Font size="16.0" />
                </font></Label>
             <Label text="City" GridPane.rowIndex="4">
                <font>
-                  <Font name="Avenir Roman" size="16.0" />
+                  <Font size="16.0" />
                </font></Label>
             <Label fx:id="passwordLabel" text="Password" GridPane.rowIndex="5">
                <font>
-                  <Font name="Avenir Roman" size="16.0" />
+                  <Font size="16.0" />
                </font></Label>
             <TextField fx:id="cityField" promptText="City" GridPane.columnIndex="1" GridPane.rowIndex="4" />
             <PasswordField fx:id="passwordField" GridPane.columnIndex="1" GridPane.rowIndex="5" />
@@ -56,23 +56,23 @@
       </GridPane>
       <HBox layoutX="327.0" layoutY="230.0" spacing="20.0" AnchorPane.bottomAnchor="20.0" AnchorPane.rightAnchor="40.0">
          <children>
-            <Button fx:id="cancel" cancelButton="true" layoutX="327.0" layoutY="230.0" mnemonicParsing="false" onAction="#handleCancel" prefHeight="30.0" style="-fx-background-color: #585e67;" text="Cancel" textFill="WHITE">
+            <Button fx:id="cancel" cancelButton="true" layoutX="327.0" layoutY="230.0" mnemonicParsing="false" onAction="#handleCancel" prefHeight="30.0" prefWidth="70.0" text="Cancel" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="14.0" />
                </font></Button>
-            <Button fx:id="okay" defaultButton="true" layoutX="405.0" layoutY="230.0" mnemonicParsing="false" onAction="#handleOk" prefHeight="30.0" style="-fx-background-color: #585e67;" text="Okay" textFill="WHITE">
+            <Button fx:id="okay" defaultButton="true" layoutX="405.0" layoutY="230.0" mnemonicParsing="false" onAction="#handleOk" prefHeight="30.0" prefWidth="70.0" text="Okay" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="14.0" />
                </font></Button>
          </children>
       </HBox>
-      <Button fx:id="deleteProfile" layoutX="23.0" layoutY="320.0" mnemonicParsing="false" onAction="#handleDeleteProfile" style="-fx-background-color: #585e67;" text="delete Profile" textFill="WHITE" visible="false" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="40.0">
+      <Button fx:id="deleteProfile" layoutX="23.0" layoutY="320.0" mnemonicParsing="false" onAction="#handleDeleteProfile" prefHeight="30.0" style="-fx-background-color: #585e67;" text="delete Profile" textFill="WHITE" visible="false" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="40.0">
          <font>
             <Font name="System Bold" size="13.0" />
          </font></Button>
       <Label fx:id="errorMessage" alignment="CENTER" contentDisplay="TOP" layoutX="200.0" layoutY="306.0" textFill="RED" AnchorPane.bottomAnchor="50.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
-      <Region layoutX="130.0" layoutY="-52.0" prefHeight="60.0" style="-fx-background-color: purple;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
-      <Label layoutX="48.0" layoutY="22.0" prefHeight="60.0" text="New Account" textFill="WHITE" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <Region id="region" layoutX="130.0" layoutY="-52.0" prefHeight="60.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+      <Label id="title" fx:id="addCustomerLabel" layoutX="48.0" layoutY="22.0" prefHeight="60.0" text="New Account" textFill="WHITE" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <font>
             <Font name="Avenir Roman" size="35.0" />
          </font>

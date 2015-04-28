@@ -98,11 +98,16 @@ public class BasketController {
 	 }
 	 
 	 @FXML private void handleSend(){
-		 java.util.Date date= new java.util.Date();
+		 java.util.Date now= new java.util.Date();
+		 SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("dd. MMMM yyyy -- HH:mm");
+		 String date = DATE_FORMAT.format(now);
+		 System.out.println("date: "+date);
 		 if (mainApp.getBasketList().size() != 0){
-			 mainApp.saveOrder(loggedInCustomer, mainApp.getTotalPrice(), date.toString());
+			 mainApp.saveOrder(loggedInCustomer, mainApp.getTotalPrice(), date);
 			 mainApp.getBasketList().clear();
 			 createAlert();
+			 mainApp.saveToFile(mainApp.orderFile);
+			 
 		 } else {
 			 basketError.setText("the basket is empty!");
 		 }

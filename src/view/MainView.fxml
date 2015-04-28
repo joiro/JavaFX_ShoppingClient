@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.shape.*?>
 <?import javafx.scene.image.*?>
 <?import javafx.scene.text.*?>
 <?import javafx.geometry.*?>
@@ -8,16 +9,16 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="600.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tableView.MainViewController">
+<AnchorPane fx:id="mainViewPane" minHeight="0.0" minWidth="0.0" prefHeight="600.0" prefWidth="1000.0" stylesheets="@Style.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tableView.MainViewController">
    <children>
-      <SplitPane dividerPositions="0.3088888888888889" layoutX="131.0" layoutY="126.0" orientation="VERTICAL" prefHeight="482.0" prefWidth="687.0" style="-fx-background-color: white;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <SplitPane fx:id="splitPaneOne" dividerPositions="0.2" layoutX="131.0" layoutY="126.0" orientation="VERTICAL" prefHeight="482.0" prefWidth="687.0" style="-fx-background-color: white;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
         <items>
-          <AnchorPane maxHeight="200.0" minHeight="150.0" minWidth="0.0" style="-fx-background-color: white;">
+          <AnchorPane fx:id="mainViewTopBar" maxHeight="200.0" minHeight="150.0" minWidth="0.0">
                <children>
-                  <Region layoutX="14.0" layoutY="57.0" prefHeight="50.0" style="-fx-background-color: purple;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                  <Region id="region" fx:id="mainViewRegion" layoutX="14.0" layoutY="57.0" prefHeight="50.0" stylesheets="@Style.css" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
                   <HBox alignment="CENTER_LEFT" prefHeight="50.0" spacing="10.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
                      <children>
-                        <Button layoutY="1.0" minHeight="25.0" mnemonicParsing="false" onAction="#handleViewCustomer" style="-fx-background-radius: 0; -fx-background-color: white;" text="Profile">
+                        <Button layoutY="1.0" mnemonicParsing="false" onAction="#handleViewCustomer" prefHeight="35.0" style="-fx-background-color: white; -fx-background-radius: 0;" text="Profile">
                            <font>
                               <Font name="Avenir Roman" size="15.0" />
                            </font></Button>
@@ -71,7 +72,7 @@
                                     <Image url="@../../../../Google%20Drive/MIT/Spring/G52GUI/Coursework%201/shopping_cart_shopping_cart.png" />
                                  </image>
                               </ImageView>
-                              <Button fx:id="showCart" alignment="CENTER" layoutX="703.0" layoutY="71.0" mnemonicParsing="false" onAction="#handleViewOrder" style="-fx-background-radius: 0; -fx-background-color: white;" text="My Basket">
+                              <Button fx:id="showCart" alignment="CENTER" layoutX="703.0" layoutY="71.0" maxHeight="35.0" minHeight="35.0" mnemonicParsing="false" onAction="#handleViewOrder" prefHeight="35.0" style="-fx-background-color: white; -fx-background-radius: 0;" text="My Basket">
                                  <font>
                                     <Font name="Avenir Roman" size="15.0" />
                                  </font></Button>
@@ -88,7 +89,7 @@
                         <VBox maxWidth="400.0" spacing="10.0">
                            <children>
                               <Label layoutX="250.0" layoutY="71.0" text="Categories:" />
-                              <HBox alignment="CENTER" layoutX="305.0" layoutY="86.0" maxWidth="400.0" spacing="35.0">
+                              <HBox alignment="CENTER" layoutX="305.0" layoutY="86.0" maxWidth="400.0" spacing="35.0" visible="false">
                                  <children>
                                     <CheckBox layoutX="206.0" layoutY="84.0" mnemonicParsing="false" text="Food" />
                                     <CheckBox layoutX="274.0" layoutY="84.0" mnemonicParsing="false" text="Electronics" />
@@ -103,7 +104,7 @@
             </AnchorPane>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
                <children>
-                  <SplitPane dividerPositions="0.5693430656934306" focusTraversable="false" prefHeight="340.0" prefWidth="798.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                  <SplitPane dividerPositions="0.5" focusTraversable="false" prefHeight="340.0" prefWidth="798.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                     <items>
                       <AnchorPane style="-fx-background-color: white;">
                            <children>
@@ -121,7 +122,7 @@
                               </HBox>
                               <TableView fx:id="tableView" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="30.0">
                                 <columns>
-                                  <TableColumn fx:id="nameColumn" minWidth="200.0" prefWidth="200.0" text="Product" />
+                                  <TableColumn fx:id="nameColumn" minWidth="200.0" prefWidth="300.0" text="Product" />
                                   <TableColumn fx:id="priceColumn" minWidth="100.0" prefWidth="100.0" text="Price" />
                                     <TableColumn fx:id="categoryColumn" minWidth="150.0" prefWidth="200.0" text="Category" />
                                 </columns>
@@ -131,18 +132,16 @@
                               </TableView>
                            </children>
                         </AnchorPane>
-                      <AnchorPane minHeight="0.0" minWidth="0.0" style="-fx-background-color: white;">
+                      <AnchorPane fx:id="productDetailsPane" minHeight="0.0" minWidth="0.0" style="-fx-background-color: white;">
                            <children>
-                              <ComboBox fx:id="comboQuantity" prefHeight="26.0" prefWidth="99.0" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="300.0" />
-                              <Button fx:id="addToCart" layoutX="221.0" layoutY="284.0" mnemonicParsing="false" onAction="#handleAddToCart" text="Add to cart" AnchorPane.bottomAnchor="30.0" AnchorPane.rightAnchor="40.0" />
-                              <VBox alignment="CENTER" layoutX="255.0" layoutY="20.0" maxWidth="0.0" minHeight="200.0" minWidth="200.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="20.0">
+                              <VBox alignment="CENTER" layoutX="255.0" layoutY="20.0" maxHeight="200.0" maxWidth="0.0" minHeight="200.0" minWidth="200.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="20.0">
                                  <children>
                                     <ImageView fx:id="imageView" fitHeight="153.0" fitWidth="150.0" layoutX="255.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="20.0" />
                                  </children>
                               </VBox>
                               <Label fx:id="name" layoutX="33.0" layoutY="44.0" text="pName" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="30.0">
                                  <font>
-                                    <Font size="18.0" />
+                                    <Font name="Avenir Roman" size="18.0" />
                                  </font>
                               </Label>
                               <Label fx:id="price" layoutX="22.0" layoutY="75.0" text="Price" AnchorPane.leftAnchor="20.0">
@@ -157,38 +156,50 @@
                                  </children>
                               </HBox>
                               <Label layoutX="16.0" layoutY="178.0" text="Description:" AnchorPane.leftAnchor="20.0" />
-                              <Label layoutX="20.0" layoutY="215.0" text="description" AnchorPane.leftAnchor="20.0" />
-                              <HBox alignment="CENTER_LEFT" layoutX="205.0" layoutY="204.0" spacing="5.0" AnchorPane.rightAnchor="60.0">
+                              <Label fx:id="description" layoutX="20.0" layoutY="215.0" text="description" AnchorPane.leftAnchor="20.0" />
+                              <Region layoutY="298.0" prefHeight="87.0" prefWidth="425.0" style="-fx-border-width: 1 0 0 0; -fx-border-color: grey;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
+                              <HBox alignment="CENTER" layoutX="60.0" layoutY="339.0" spacing="20.0" AnchorPane.bottomAnchor="30.0">
                                  <children>
-                                    <ImageView fx:id="ratingOne" fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" visible="false">
-                                       <image>
-                                          <Image url="@../../../../Google%20Drive/MIT/Spring/G52GUI/Coursework%201/rating_icon-01.png" />
-                                       </image>
-                                    </ImageView>
-                                    <ImageView fx:id="ratingTwo" fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" visible="false">
-                                       <image>
-                                          <Image url="@../../../../Google%20Drive/MIT/Spring/G52GUI/Coursework%201/rating_icon-01.png" />
-                                       </image>
-                                    </ImageView>
-                                    <ImageView fx:id="ratingThree" fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" visible="false">
-                                       <image>
-                                          <Image url="@../../../../Google%20Drive/MIT/Spring/G52GUI/Coursework%201/rating_icon-01.png" />
-                                       </image>
-                                    </ImageView>
-                                    <ImageView fx:id="ratingFour" fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" visible="false">
-                                       <image>
-                                          <Image url="@../../../../Google%20Drive/MIT/Spring/G52GUI/Coursework%201/rating_icon-01.png" />
-                                       </image>
-                                    </ImageView>
-                                    <ImageView fx:id="ratingFive" fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" visible="false">
-                                       <image>
-                                          <Image url="@../../../../Google%20Drive/MIT/Spring/G52GUI/Coursework%201/rating_icon-01.png" />
-                                       </image>
-                                    </ImageView>
+                                    <Label layoutX="124.0" layoutY="312.0" text="Quantity:" AnchorPane.bottomAnchor="50.0" AnchorPane.leftAnchor="60.0" />
+                                    <ComboBox fx:id="comboQuantity" layoutX="126.0" layoutY="339.0" AnchorPane.leftAnchor="120.0" AnchorPane.topAnchor="339.0" />
                                  </children>
                               </HBox>
-                              <ComboBox fx:id="comboRating" layoutX="230.0" layoutY="250.0" onAction="#handleRating" AnchorPane.rightAnchor="145.0" />
-                              <Label layoutX="231.0" layoutY="230.0" prefHeight="16.0" prefWidth="150.0" text="Rate this product:" AnchorPane.rightAnchor="44.0" />
+                              <Button id="addToCartButton" fx:id="addToCart" layoutX="221.0" layoutY="284.0" mnemonicParsing="false" onAction="#handleAddToCart" prefHeight="30.0" text="Add to Basket" AnchorPane.bottomAnchor="30.0" AnchorPane.rightAnchor="50.0" />
+                              <VBox layoutX="230.0" layoutY="230.0" spacing="10.0" AnchorPane.bottomAnchor="100.0" AnchorPane.rightAnchor="45.0">
+                                 <children>
+                                    <HBox alignment="CENTER_LEFT" spacing="5.0">
+                                       <children>
+                                          <ImageView fx:id="ratingOne" fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" visible="false">
+                                             <image>
+                                                <Image url="@../../../../Google%20Drive/MIT/Spring/G52GUI/Coursework%201/rating_icon-01.png" />
+                                             </image>
+                                          </ImageView>
+                                          <ImageView fx:id="ratingTwo" fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" visible="false">
+                                             <image>
+                                                <Image url="@../../../../Google%20Drive/MIT/Spring/G52GUI/Coursework%201/rating_icon-01.png" />
+                                             </image>
+                                          </ImageView>
+                                          <ImageView fx:id="ratingThree" fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" visible="false">
+                                             <image>
+                                                <Image url="@../../../../Google%20Drive/MIT/Spring/G52GUI/Coursework%201/rating_icon-01.png" />
+                                             </image>
+                                          </ImageView>
+                                          <ImageView fx:id="ratingFour" fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" visible="false">
+                                             <image>
+                                                <Image url="@../../../../Google%20Drive/MIT/Spring/G52GUI/Coursework%201/rating_icon-01.png" />
+                                             </image>
+                                          </ImageView>
+                                          <ImageView fx:id="ratingFive" fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" visible="false">
+                                             <image>
+                                                <Image url="@../../../../Google%20Drive/MIT/Spring/G52GUI/Coursework%201/rating_icon-01.png" />
+                                             </image>
+                                          </ImageView>
+                                       </children>
+                                    </HBox>
+                                    <Label layoutX="231.0" layoutY="230.0" prefHeight="16.0" prefWidth="150.0" text="Rate this product:" AnchorPane.rightAnchor="44.0" />
+                                    <ComboBox fx:id="comboRating" layoutX="230.0" layoutY="250.0" onAction="#handleRating" AnchorPane.rightAnchor="145.0" />
+                                 </children>
+                              </VBox>
                            </children>
                         </AnchorPane>
                     </items>

@@ -15,7 +15,7 @@ import javafx.stage.Stage;
 public class AddCustomerController {
 	
 	@FXML private TextField firstNameField, lastNameField, emailAddressField, passwordField, streetField, cityField;
-	@FXML private Label passwordLabel;
+	@FXML private Label passwordLabel, addCustomerLabel;
 	@FXML private Button deleteProfile;
 	@FXML private Label errorMessage;
 	
@@ -30,6 +30,7 @@ public class AddCustomerController {
         loggedInCustomer = customer;
         // show / hide nodes if a customer is logged in
         if (loggedInCustomer != null) {
+        	addCustomerLabel.setText("Edit Details");
         	deleteProfile.setVisible(true);
         	passwordField.setVisible(false);
         	passwordLabel.setVisible(false);
@@ -48,21 +49,21 @@ public class AddCustomerController {
 	
     // called when Ok button is clicked
 	@FXML public void handleOk() {
-		// checks if firstname or password fields are empty
-		if (!firstNameField.getText().isEmpty() && !passwordField.getText().isEmpty()) {
-			// checks if password fiel is at least 4 characters
-			if (!(passwordField.getText().length() < 4)) {
-				// checks if it is an existing customer...
-				if (loggedInCustomer != null) {
-					loggedInCustomer.setFirstName(firstNameField.getText());
-					loggedInCustomer.setLastName(lastNameField.getText());
-					loggedInCustomer.setEmailAddress(emailAddressField.getText());
-					loggedInCustomer.setStreet(streetField.getText());
-					loggedInCustomer.setCity(cityField.getText());
-					mainApp.saveCustomerToFile(mainApp.customerFile);
-					mainApp.showCustomer(loggedInCustomer);
-				// ... or a new customer
-				} else {
+		// checks if it is an existing customer...
+		if (loggedInCustomer != null) {
+			loggedInCustomer.setFirstName(firstNameField.getText());
+			loggedInCustomer.setLastName(lastNameField.getText());
+			loggedInCustomer.setEmailAddress(emailAddressField.getText());
+			loggedInCustomer.setStreet(streetField.getText());
+			loggedInCustomer.setCity(cityField.getText());
+			mainApp.saveToFile(mainApp.customerFile);
+			mainApp.showCustomer(loggedInCustomer);
+		// ... or a new customer
+		} else {
+			// checks if firstname or password fields are empty
+			if (!firstNameField.getText().isEmpty() && !passwordField.getText().isEmpty()) {
+				// checks if password field is at least 4 characters
+				if (!(passwordField.getText().length() < 4)) {
 					Customer customer = new Customer();
 					customer.setFirstName(firstNameField.getText());
 					customer.setLastName(lastNameField.getText());
@@ -71,17 +72,17 @@ public class AddCustomerController {
 					customer.setStreet(streetField.getText());
 					customer.setCity(cityField.getText());
 					mainApp.getCustomerList().add(customer);
-					mainApp.saveCustomerToFile(mainApp.customerFile);
+					mainApp.saveToFile(mainApp.customerFile);
 					mainApp.updateLoginUI();	 
 					mainApp.showLoginView();
+				} else {
+					errorMessage.setText("Password must be at least 4 characters");
 				}
 			} else {
-				errorMessage.setText("Password must be at least 4 characters");
+				errorMessage.setText("First Name or Password cannot be empty!");
 			}
-		} else {
-			errorMessage.setText("FirstName or Password cannot be empty!");
 		}
-	}
+	} 
 	
     public void handleCancel() {
     	if (loggedInCustomer != null) {

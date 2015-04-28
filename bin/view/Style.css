@@ -1,0 +1,79 @@
+.button {
+	-fx-text-fill: #ffffff;
+	-fx-background-color: #585e67;
+}
+
+#region {
+	-fx-background-color: #800080;
+}
+
+#mainViewTopBar .button {
+ 	-fx-text-fill: black;
+}
+
+.split-pane *.split-pane-divider {
+    -fx-padding: 0 1 0 1;
+}
+
+/* #mainViewTopBar .button { */
+/* 	-fx-text-fill: black; */
+/* 	-fx-background-color: #ffffff; */
+/* 	-fx-background-radius: 0; */
+/* } */
+
+#mainViewTopBar .label {
+	-fx-text-fill: #ffffff;
+	-fx-font-family: "Avenir";
+}
+
+#anchorPane .label {
+	-fx-font-family: "Avenir";
+	-fx-font-size: 16;
+}
+
+.label#nameLabel {
+	-fx-font-family: "Avenir";
+	-fx-font-size: 25;
+}
+
+.label#title {
+	-fx-font-family: "Avenir";
+	-fx-font-size: 35;
+}
+
+.label#titleSmall {
+	-fx-font-family: "Avenir";
+	-fx-font-size: 20;
+}
+
+#notifyFee {
+	-fx-text-fill: #ffb012;
+}
+
+.label#shippingFee {
+	-fx-font-size: 14;
+}	
+
+#information, #totalPrice, #basketError {
+	-fx-text-fill: #ff0000;
+}
+
+#customerComboBox {
+	-fx-background-radius: 0;
+	-fx-background-color: #ffffff;
+	-fx-border-color: grey;
+}
+
+#createAccountLabel {
+	-fx-text-fill: #585e67;
+}
+
+#addToCartButton {
+	-fx-text-fill: black;
+	-fx-background-color: #ffb012;
+}
+
+#anchorPane {
+	-fx-background-color: white;
+}
+

@@ -44,7 +44,6 @@ public class CustomerController {
 	 }
 	 
 	 @FXML private void handleEditDetails() {
-		 System.out.println("edit Details");
 		 mainApp.addCustomer(loggedInCustomer);
 	 }
 	 

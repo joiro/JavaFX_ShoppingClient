@@ -16,7 +16,6 @@ public class OrderController {
 	private Stage primaryStage;
 	private MainApp mainApp;
 	private Customer loggedInCustomer;
-	
 
 	public void setPrimaryStage(Stage primaryStage) {
 		this.primaryStage = primaryStage;
@@ -30,14 +29,14 @@ public class OrderController {
 	}
 	
 	private void viewOrders() {
-		 //System.out.println("orderList size: "+mainApp.getOrderList().size());
+		//mainApp.loadFile(mainApp.orderFile);
 		 if (mainApp.getOrderList().size() > 0) {
 			 for ( int i=0;i<mainApp.getOrderList().size();i++) {
 				 if (mainApp.getOrderList().get(i).getCustomer().equals(loggedInCustomer)) {
+					 System.out.println("customers match");
 					 Order order = mainApp.getOrderList().get(i);
-					 p.add(order.getDate()+": "+order.getTotalSum());
-					 System.out.println("p: "+p);
-					 //System.out.println("date and totalSum: "+order.getDate()+" : "+order.getTotalSum());
+					 //System.out.println("order: "+mainApp.getOrderList().get(i).getDate());
+					 p.add(order.getDate()+"  -----  Total Price: £"+order.getTotalSum());
 				 }
 			 }
 			 orderlistView.setItems(p);
@@ -45,12 +44,10 @@ public class OrderController {
 	 }
 	
 	@FXML public void handleOk() {
-		System.out.println("handleOk");
 		mainApp.showCustomer(loggedInCustomer);
 	}
 	
 	@FXML public void handleCancel() {
-		System.out.println("handleCancel");
 		mainApp.showCustomer(loggedInCustomer);
 	}
 
