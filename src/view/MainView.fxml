@@ -106,7 +106,7 @@
                <children>
                   <SplitPane dividerPositions="0.5" focusTraversable="false" prefHeight="340.0" prefWidth="798.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                     <items>
-                      <AnchorPane style="-fx-background-color: white;">
+                      <AnchorPane minWidth="250.0" style="-fx-background-color: white;">
                            <children>
                               <HBox>
                                  <children>
@@ -157,7 +157,7 @@
                               </HBox>
                               <Label layoutX="16.0" layoutY="178.0" text="Description:" AnchorPane.leftAnchor="20.0" />
                               <Label fx:id="description" layoutX="20.0" layoutY="215.0" text="description" AnchorPane.leftAnchor="20.0" />
-                              <Region layoutY="298.0" prefHeight="87.0" prefWidth="425.0" style="-fx-border-width: 1 0 0 0; -fx-border-color: grey;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
+                              <Region layoutY="298.0" prefHeight="87.0" prefWidth="425.0" style="-fx-border-width: 1 0 0 0; -fx-border-color: #d3d3d3;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
                               <HBox alignment="CENTER" layoutX="60.0" layoutY="339.0" spacing="20.0" AnchorPane.bottomAnchor="30.0">
                                  <children>
                                     <Label layoutX="124.0" layoutY="312.0" text="Quantity:" AnchorPane.bottomAnchor="50.0" AnchorPane.leftAnchor="60.0" />

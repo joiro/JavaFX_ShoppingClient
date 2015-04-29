@@ -13,6 +13,7 @@
 
 .split-pane *.split-pane-divider {
     -fx-padding: 0 1 0 1;
+    -fx-background-color: #d3d3d3;
 }
 
 /* #mainViewTopBar .button { */
@@ -61,7 +62,7 @@
 #customerComboBox {
 	-fx-background-radius: 0;
 	-fx-background-color: #ffffff;
-	-fx-border-color: grey;
+	-fx-border-color: #d3d3d3;
 }
 
 #createAccountLabel {

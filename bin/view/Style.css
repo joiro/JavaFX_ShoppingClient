@@ -13,6 +13,7 @@
 
 .split-pane *.split-pane-divider {
     -fx-padding: 0 1 0 1;
+    -fx-background-color: #d3d3d3;
 }
 
 /* #mainViewTopBar .button { */

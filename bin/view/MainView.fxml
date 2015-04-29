@@ -11,7 +11,7 @@
 
 <AnchorPane fx:id="mainViewPane" minHeight="0.0" minWidth="0.0" prefHeight="600.0" prefWidth="1000.0" stylesheets="@Style.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tableView.MainViewController">
    <children>
-      <SplitPane dividerPositions="0.3088888888888889" layoutX="131.0" layoutY="126.0" orientation="VERTICAL" prefHeight="482.0" prefWidth="687.0" style="-fx-background-color: white;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <SplitPane fx:id="splitPaneOne" dividerPositions="0.2" layoutX="131.0" layoutY="126.0" orientation="VERTICAL" prefHeight="482.0" prefWidth="687.0" style="-fx-background-color: white;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
         <items>
           <AnchorPane fx:id="mainViewTopBar" maxHeight="200.0" minHeight="150.0" minWidth="0.0">
                <children>
@@ -104,9 +104,9 @@
             </AnchorPane>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
                <children>
-                  <SplitPane dividerPositions="0.5693430656934306" focusTraversable="false" prefHeight="340.0" prefWidth="798.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                  <SplitPane dividerPositions="0.5" focusTraversable="false" prefHeight="340.0" prefWidth="798.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                     <items>
-                      <AnchorPane style="-fx-background-color: white;">
+                      <AnchorPane minWidth="250.0" style="-fx-background-color: white;">
                            <children>
                               <HBox>
                                  <children>
@@ -122,7 +122,7 @@
                               </HBox>
                               <TableView fx:id="tableView" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="30.0">
                                 <columns>
-                                  <TableColumn fx:id="nameColumn" minWidth="200.0" prefWidth="200.0" text="Product" />
+                                  <TableColumn fx:id="nameColumn" minWidth="200.0" prefWidth="300.0" text="Product" />
                                   <TableColumn fx:id="priceColumn" minWidth="100.0" prefWidth="100.0" text="Price" />
                                     <TableColumn fx:id="categoryColumn" minWidth="150.0" prefWidth="200.0" text="Category" />
                                 </columns>
@@ -157,7 +157,7 @@
                               </HBox>
                               <Label layoutX="16.0" layoutY="178.0" text="Description:" AnchorPane.leftAnchor="20.0" />
                               <Label fx:id="description" layoutX="20.0" layoutY="215.0" text="description" AnchorPane.leftAnchor="20.0" />
-                              <Region layoutY="298.0" prefHeight="87.0" prefWidth="425.0" style="-fx-border-width: 1 0 0 0; -fx-border-color: grey;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
+                              <Region layoutY="298.0" prefHeight="87.0" prefWidth="425.0" style="-fx-border-width: 1 0 0 0; -fx-border-color: #d3d3d3;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
                               <HBox alignment="CENTER" layoutX="60.0" layoutY="339.0" spacing="20.0" AnchorPane.bottomAnchor="30.0">
                                  <children>
                                     <Label layoutX="124.0" layoutY="312.0" text="Quantity:" AnchorPane.bottomAnchor="50.0" AnchorPane.leftAnchor="60.0" />
