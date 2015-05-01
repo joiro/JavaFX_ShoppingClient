@@ -6,7 +6,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane id="anchorPane" fx:id="addCustomerPane" prefHeight="370.0" prefWidth="600.0" stylesheets="@Style.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tableView.AddCustomerController">
+<AnchorPane id="anchorPane" fx:id="addCustomerPane" prefHeight="370.0" prefWidth="600.0" stylesheets="@Style.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.AddCustomerController">
    <children>
       <GridPane layoutX="43.0" layoutY="41.0" prefHeight="141.0" vgap="25.0" AnchorPane.leftAnchor="40.0" AnchorPane.rightAnchor="40.0" AnchorPane.topAnchor="100.0">
         <columnConstraints>
@@ -72,7 +72,7 @@
          </font></Button>
       <Label fx:id="errorMessage" alignment="CENTER" contentDisplay="TOP" layoutX="200.0" layoutY="306.0" textFill="RED" AnchorPane.bottomAnchor="50.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
       <Region id="region" layoutX="130.0" layoutY="-52.0" prefHeight="60.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
-      <Label id="title" fx:id="addCustomerLabel" layoutX="48.0" layoutY="22.0" prefHeight="60.0" text="New Account" textFill="WHITE" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <Label id="title" fx:id="addCustomerLabel" layoutX="48.0" layoutY="22.0" prefHeight="60.0" text="New Customer" textFill="WHITE" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <font>
             <Font name="Avenir Roman" size="35.0" />
          </font>

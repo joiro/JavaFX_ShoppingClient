@@ -17,7 +17,7 @@ public class Product {
 	private String image;
 	private int number;
 	
-
+	// Initialisation
 	public Product(String name, double price, String category, String description, String image, int number) {
 		this.name = new SimpleStringProperty(name);
 		this.price = price;
@@ -28,7 +28,6 @@ public class Product {
 		
 	}
 	// getter
-	
 	public StringProperty nameProperty() { return name;}
 	
 	public String getName() { return name.get(); }

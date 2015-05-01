@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-	<project name="tableView" default="do-deploy" basedir="."  xmlns:fx="javafx:com.sun.javafx.tools.ant">
+	<project name="shoppingClient" default="do-deploy" basedir="."  xmlns:fx="javafx:com.sun.javafx.tools.ant">
 	<target name="init-fx-tasks">
 		<path id="fxant">
 			<filelist>
@@ -22,7 +22,7 @@
 		
 		<mkdir dir="project" />
 		<copy todir="project">
-			<fileset dir="/Users/agentjs/Documents/workspace/tableView">
+			<fileset dir="/Users/agentjs/GitHub/shoppingClient">
 				<include name="src/**" />
 			</fileset>
 		</copy>
@@ -82,20 +82,20 @@
 		
 		
 		<fx:resources id="appRes">
-			<fx:fileset dir="dist" includes="tableView.jar"/>
+			<fx:fileset dir="dist" includes="shoppingClient.jar"/>
 			<fx:fileset dir="dist" includes="libs/*"/>
 		</fx:resources> 
 		
 		<fx:application id="fxApplication"
 			name="ShoppingClient"
-			mainClass="tableView.MainApp"
+			mainClass="controller.MainApp"
 		/>
 	
 		<mkdir dir="build/classes/META-INF" />
 		
 		
 		
-		<fx:jar destfile="dist/tableView.jar">
+		<fx:jar destfile="dist/shoppingClient.jar">
 			<fx:application refid="fxApplication"/>
 			<fileset dir="build/classes">
 			</fileset>
@@ -118,10 +118,10 @@
 			includeDT="false"
 			offlineAllowed="true"
 			outdir="${basedir}/deploy"
-			outfile="tableView" nativeBundles="dmg"
+			outfile="shoppingClient" nativeBundles="dmg"
 			updatemode="background" >
 	
-			<fx:info title="tableView" vendor="jonasschindler.com"/>
+			<fx:info title="shoppingClient" vendor="jonasschindler.com"/>
 			<fx:application refId="fxApplication"/>
 			<fx:resources refid="appRes"/>
 		</fx:deploy>
