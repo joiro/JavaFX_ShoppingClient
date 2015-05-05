@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <customer>
     <customer>
-        <city></city>
-        <emailAddress></emailAddress>
+        <city>Nottingham</city>
+        <emailAddress>jonas.schindler@gmail.com</emailAddress>
         <firstName>Jonas</firstName>
         <lastName>Schindler</lastName>
         <password>password</password>
-        <street></street>
+        <street>1 Peveril Street</street>
     </customer>
 </customer>
