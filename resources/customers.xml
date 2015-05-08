@@ -8,4 +8,28 @@
         <password>password</password>
         <street>1 Peveril Street</street>
     </customer>
+    <customer>
+        <city></city>
+        <emailAddress></emailAddress>
+        <firstName>Martin</firstName>
+        <lastName></lastName>
+        <password>12345</password>
+        <street></street>
+    </customer>
+    <customer>
+        <city></city>
+        <emailAddress></emailAddress>
+        <firstName>bill</firstName>
+        <lastName></lastName>
+        <password>password</password>
+        <street></street>
+    </customer>
+    <customer>
+        <city></city>
+        <emailAddress></emailAddress>
+        <firstName>martin</firstName>
+        <lastName></lastName>
+        <password>0000</password>
+        <street></street>
+    </customer>
 </customer>
